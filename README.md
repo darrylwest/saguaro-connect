@@ -7,12 +7,14 @@ _A swift 2.0 HTTP Session connection wrapper for iOS/OSX applications_
 <a href="https://developer.apple.com/swift/"><img src="http://raincitysoftware.com/swift2-badge.png" alt="" width="65" height="20" border="0" /></a>
 [![Build Status](https://travis-ci.org/darrylwest/saguaro-connect.svg?branch=master)](https://travis-ci.org/darrylwest/saguaro-connect)
 
+_This project is currently based on the excellent <a href="https://github.com/JustHTTP/Just">JustHTTP / Just</a> project by Daniel Duan._
+
 ## Features
 
-* provides head, get, post, put, delete, patch
-* asynchronous or synchronous
+* provides head, get, post, put, delete, patch methods
+* runs asynchronous or synchronous
 * simple request / response objects
-* cookies
+* cookie support
 * multipart upload
 
 ## Installation
