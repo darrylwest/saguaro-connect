@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		BA30282F1B3A27CA00715013 /* SaguaroConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = BA30282E1B3A27CA00715013 /* SaguaroConnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA3028361B3A27CA00715013 /* SaguaroConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA30282B1B3A27CA00715013 /* SaguaroConnect.framework */; };
-		BA30283B1B3A27CA00715013 /* SaguaroConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30283A1B3A27CA00715013 /* SaguaroConnectTests.swift */; };
+		BA3028481B3A4B5000715013 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028471B3A4B5000715013 /* Just.swift */; };
+		BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */; };
+		BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */; };
+		BA30284E1B3A4C1700715013 /* HTtPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */; };
+		BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284F1B3A4C6A00715013 /* SAConnect.swift */; };
+		BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028511B3A4CCE00715013 /* SAConnectTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +32,13 @@
 		BA30282E1B3A27CA00715013 /* SaguaroConnect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaguaroConnect.h; sourceTree = "<group>"; };
 		BA3028301B3A27CA00715013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3028351B3A27CA00715013 /* SaguaroConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaguaroConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA30283A1B3A27CA00715013 /* SaguaroConnectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaguaroConnectTests.swift; sourceTree = "<group>"; };
 		BA30283C1B3A27CA00715013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA3028471B3A4B5000715013 /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
+		BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseInsensitiveDictionary.swift; sourceTree = "<group>"; };
+		BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTtPStatusCodes.swift; sourceTree = "<group>"; };
+		BA30284F1B3A4C6A00715013 /* SAConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnect.swift; sourceTree = "<group>"; };
+		BA3028511B3A4CCE00715013 /* SAConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnectTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +81,10 @@
 		BA30282D1B3A27CA00715013 /* SaguaroConnect */ = {
 			isa = PBXGroup;
 			children = (
+				BA3028451B3A4AF800715013 /* core */,
 				BA30282E1B3A27CA00715013 /* SaguaroConnect.h */,
 				BA3028301B3A27CA00715013 /* Info.plist */,
+				BA30284F1B3A4C6A00715013 /* SAConnect.swift */,
 			);
 			path = SaguaroConnect;
 			sourceTree = "<group>";
@@ -80,10 +92,29 @@
 		BA3028391B3A27CA00715013 /* SaguaroConnectTests */ = {
 			isa = PBXGroup;
 			children = (
-				BA30283A1B3A27CA00715013 /* SaguaroConnectTests.swift */,
+				BA3028461B3A4B1700715013 /* core */,
 				BA30283C1B3A27CA00715013 /* Info.plist */,
+				BA3028511B3A4CCE00715013 /* SAConnectTests.swift */,
 			);
 			path = SaguaroConnectTests;
+			sourceTree = "<group>";
+		};
+		BA3028451B3A4AF800715013 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				BA3028471B3A4B5000715013 /* Just.swift */,
+				BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */,
+				BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */,
+				BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		BA3028461B3A4B1700715013 /* core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +173,7 @@
 		BA3028221B3A27CA00715013 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "darryl.west@raincitysoftware.com";
 				TargetAttributes = {
@@ -193,6 +225,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */,
+				BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */,
+				BA3028481B3A4B5000715013 /* Just.swift in Sources */,
+				BA30284E1B3A4C1700715013 /* HTtPStatusCodes.swift in Sources */,
+				BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA30283B1B3A27CA00715013 /* SaguaroConnectTests.swift in Sources */,
+				BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -294,7 +331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,6 +344,7 @@
 		BA3028401B3A27CA00715013 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -317,12 +355,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.raincitysoftware.com.SaguaroConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		BA3028411B3A27CA00715013 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -375,6 +415,7 @@
 				BA3028411B3A27CA00715013 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA3028421B3A27CA00715013 /* Build configuration list for PBXNativeTarget "SaguaroConnectTests" */ = {
 			isa = XCConfigurationList;
@@ -383,6 +424,7 @@
 				BA3028441B3A27CA00715013 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
