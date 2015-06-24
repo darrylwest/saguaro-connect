@@ -132,14 +132,17 @@ public class Just: NSObject, NSURLSessionDelegate {
         if originalObject is NSNull {
             return "null"
         } else {
-            let legalURLCharactersToBeEscaped: CFStringRef = ":&=;+!@#$()',*"
-            return CFURLCreateStringByAddingPercentEscapes(
-                nil,
-                "\(originalObject)",
-                nil,
-                legalURLCharactersToBeEscaped,
-                CFStringBuiltInEncodings.UTF8.rawValue
-                ) as String
+            guard let originalString = originalObject as? String else {
+                return "null"
+            }
+            
+            let legalURLCharactersToBeEscaped = NSCharacterSet(charactersInString: ":&=;+!@#$()',*").invertedSet
+            
+            guard let escaped = originalString.stringByAddingPercentEncodingWithAllowedCharacters( legalURLCharactersToBeEscaped ) else {
+                return "null"
+            }
+            
+            return escaped
         }
     }
     

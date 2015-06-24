@@ -15,6 +15,7 @@
 		BA30284E1B3A4C1700715013 /* HTtPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */; };
 		BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284F1B3A4C6A00715013 /* SAConnect.swift */; };
 		BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028511B3A4CCE00715013 /* SAConnectTests.swift */; };
+		BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB26CD21B3B10F4005F772C /* JustTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTtPStatusCodes.swift; sourceTree = "<group>"; };
 		BA30284F1B3A4C6A00715013 /* SAConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnect.swift; sourceTree = "<group>"; };
 		BA3028511B3A4CCE00715013 /* SAConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnectTests.swift; sourceTree = "<group>"; };
+		BAB26CD21B3B10F4005F772C /* JustTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		BA3028461B3A4B1700715013 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				BAB26CD21B3B10F4005F772C /* JustTests.swift */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */,
+				BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
