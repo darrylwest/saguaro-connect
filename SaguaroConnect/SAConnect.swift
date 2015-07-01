@@ -101,7 +101,7 @@ public struct SARemote: HTTPRemote {
             asyncCompletionHandler:request.asyncCompletionHandler)
     }
     
-    init() {
+    public init() {
         
     }
 }
