@@ -12,7 +12,7 @@
 		BA3028481B3A4B5000715013 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028471B3A4B5000715013 /* Just.swift */; };
 		BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */; };
 		BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */; };
-		BA30284E1B3A4C1700715013 /* HTtPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */; };
+		BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */; };
 		BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284F1B3A4C6A00715013 /* SAConnect.swift */; };
 		BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028511B3A4CCE00715013 /* SAConnectTests.swift */; };
 		BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB26CD21B3B10F4005F772C /* JustTests.swift */; };
@@ -37,7 +37,7 @@
 		BA3028471B3A4B5000715013 /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
 		BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseInsensitiveDictionary.swift; sourceTree = "<group>"; };
 		BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTtPStatusCodes.swift; sourceTree = "<group>"; };
+		BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		BA30284F1B3A4C6A00715013 /* SAConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnect.swift; sourceTree = "<group>"; };
 		BA3028511B3A4CCE00715013 /* SAConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnectTests.swift; sourceTree = "<group>"; };
 		BAB26CD21B3B10F4005F772C /* JustTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				BA3028471B3A4B5000715013 /* Just.swift */,
 				BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */,
 				BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */,
-				BA30284D1B3A4C1700715013 /* HTtPStatusCodes.swift */,
+				BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 				BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */,
 				BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */,
 				BA3028481B3A4B5000715013 /* Just.swift in Sources */,
-				BA30284E1B3A4C1700715013 /* HTtPStatusCodes.swift in Sources */,
+				BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */,
 				BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
