@@ -14,8 +14,8 @@ public enum HTTPFile {
     case Text(String,String,String?) // filename, text, mimetype
 }
 
-// Supported request types
-enum HTTPMethod: String {
+// Supported request types; public to enable mock
+public enum HTTPMethod: String {
     case DELETE = "DELETE"
     case GET = "GET"
     case HEAD = "HEAD"
