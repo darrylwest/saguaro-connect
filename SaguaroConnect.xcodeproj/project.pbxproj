@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA2AB2FD1B5D3DAF0092F99B /* SARemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */; };
+		BA2AB2FF1B5D4E9C0092F99B /* SARemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */; };
 		BA30282F1B3A27CA00715013 /* SaguaroConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = BA30282E1B3A27CA00715013 /* SaguaroConnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA3028361B3A27CA00715013 /* SaguaroConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA30282B1B3A27CA00715013 /* SaguaroConnect.framework */; };
 		BA3028481B3A4B5000715013 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028471B3A4B5000715013 /* Just.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SARemoteService.swift; sourceTree = "<group>"; };
+		BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SARemoteServiceTests.swift; sourceTree = "<group>"; };
 		BA30282B1B3A27CA00715013 /* SaguaroConnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SaguaroConnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA30282E1B3A27CA00715013 /* SaguaroConnect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaguaroConnect.h; sourceTree = "<group>"; };
 		BA3028301B3A27CA00715013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 				BA30282E1B3A27CA00715013 /* SaguaroConnect.h */,
 				BA3028301B3A27CA00715013 /* Info.plist */,
 				BA30284F1B3A4C6A00715013 /* SAConnect.swift */,
+				BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */,
 			);
 			path = SaguaroConnect;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 				BA3028461B3A4B1700715013 /* core */,
 				BA30283C1B3A27CA00715013 /* Info.plist */,
 				BA3028511B3A4CCE00715013 /* SAConnectTests.swift */,
+				BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */,
 			);
 			path = SaguaroConnectTests;
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 				BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */,
 				BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */,
 				BA3028481B3A4B5000715013 /* Just.swift in Sources */,
+				BA2AB2FD1B5D3DAF0092F99B /* SARemoteService.swift in Sources */,
 				BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */,
 				BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */,
 			);
@@ -240,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA2AB2FF1B5D4E9C0092F99B /* SARemoteServiceTests.swift in Sources */,
 				BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */,
 				BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */,
 			);

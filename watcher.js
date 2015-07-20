@@ -55,8 +55,8 @@ var changeHandler = function(event, filename) {
     }
 };
 
-fs.watch( './SaguaroLogger/', { recursive:true }, changeHandler );
-fs.watch( './SaguaroLoggerTests/', { recursive:true }, changeHandler );
+fs.watch( './SaguaroConnect/', { recursive:true }, changeHandler );
+fs.watch( './SaguaroConnectTests/', { recursive:true }, changeHandler );
 
 process.stdout.write( clearScreen ); 
 console.log('watching swift files...');
