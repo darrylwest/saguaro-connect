@@ -25,7 +25,18 @@ public protocol SAServiceErrorType {
 
 public protocol SARemoteServiceType {
     var serviceName:String { get }
-    func createError(type:SAServiceErrorType, request:SARemoteRequestModel, userInfo:[String:AnyObject]?) -> NSError
+}
+
+public extension SARemoteServiceType {
+    public func createError(errorType: SAServiceErrorType, request:SARemoteRequestModel, userInfo:[String:AnyObject]? = [:]) -> NSError {
+        var info = userInfo!
+
+        info[ "requestId" ] = request.id
+        info[ "requestTime" ] = request.requestTime
+        info[ "message" ] = errorType.message
+
+        return NSError(domain: serviceName, code: errorType.code, userInfo: info)
+    }
 }
 
 public struct SAErrorType: SAServiceErrorType {
@@ -57,20 +68,11 @@ public class SAQueryRequest: SARemoteRequest {
     }
 }
 
-public class SARemoteService: SARemoteServiceType {
-    public let serviceName:String
 
-    public init(serviceName:String) {
+class SARemoteService: SARemoteServiceType {
+    let serviceName:String
+
+    init(serviceName:String) {
         self.serviceName = serviceName
-    }
-
-    public func createError(errorType: SAServiceErrorType, request:SARemoteRequestModel, userInfo:[String:AnyObject]? = [:]) -> NSError {
-        var info = userInfo!
-
-        info[ "requestId" ] = request.id
-        info[ "requestTime" ] = request.requestTime
-        info[ "message" ] = errorType.message
-
-        return NSError(domain: serviceName, code: errorType.code, userInfo: info)
     }
 }
