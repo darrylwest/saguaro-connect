@@ -19,6 +19,8 @@
 		BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */; };
 		BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284F1B3A4C6A00715013 /* SAConnect.swift */; };
 		BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028511B3A4CCE00715013 /* SAConnectTests.swift */; };
+		BA8640A61B5EB5F40059D95B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8640A51B5EB5F40059D95B /* Cache.swift */; };
+		BA8640A81B5EB60A0059D95B /* CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8640A71B5EB60A0059D95B /* CacheTests.swift */; };
 		BAA5EA1D1B5E92E600D3EB94 /* JNParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA1C1B5E92E600D3EB94 /* JNParser.swift */; };
 		BAA5EA1F1B5E932400D3EB94 /* JNParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA1E1B5E932400D3EB94 /* JNParserTests.swift */; };
 		BAA5EA211B5E938C00D3EB94 /* TestDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */; };
@@ -51,6 +53,8 @@
 		BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		BA30284F1B3A4C6A00715013 /* SAConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnect.swift; sourceTree = "<group>"; };
 		BA3028511B3A4CCE00715013 /* SAConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnectTests.swift; sourceTree = "<group>"; };
+		BA8640A51B5EB5F40059D95B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		BA8640A71B5EB60A0059D95B /* CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTests.swift; sourceTree = "<group>"; };
 		BAA5EA1C1B5E92E600D3EB94 /* JNParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNParser.swift; sourceTree = "<group>"; };
 		BAA5EA1E1B5E932400D3EB94 /* JNParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNParserTests.swift; sourceTree = "<group>"; };
 		BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDataset.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 				BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */,
 				BA2AB3021B5D735F0092F99B /* InternetReachability.swift */,
 				BAA5EA1C1B5E92E600D3EB94 /* JNParser.swift */,
+				BA8640A51B5EB5F40059D95B /* Cache.swift */,
 			);
 			path = SaguaroConnect;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 				BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */,
 				BAA5EA1E1B5E932400D3EB94 /* JNParserTests.swift */,
 				BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */,
+				BA8640A71B5EB60A0059D95B /* CacheTests.swift */,
 			);
 			path = SaguaroConnectTests;
 			sourceTree = "<group>";
@@ -250,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */,
+				BA8640A61B5EB5F40059D95B /* Cache.swift in Sources */,
 				BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */,
 				BA3028481B3A4B5000715013 /* Just.swift in Sources */,
 				BA2AB2FD1B5D3DAF0092F99B /* SARemoteService.swift in Sources */,
@@ -267,6 +274,7 @@
 				BAA5EA1F1B5E932400D3EB94 /* JNParserTests.swift in Sources */,
 				BA2AB2FF1B5D4E9C0092F99B /* SARemoteServiceTests.swift in Sources */,
 				BAA5EA211B5E938C00D3EB94 /* TestDataset.swift in Sources */,
+				BA8640A81B5EB60A0059D95B /* CacheTests.swift in Sources */,
 				BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */,
 				BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */,
 				BA2AB3011B5D72DF0092F99B /* InternetReachabilityTests.swift in Sources */,
