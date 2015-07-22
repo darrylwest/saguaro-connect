@@ -48,6 +48,10 @@ public struct JNDateFormatter: JSONDateType {
     }
 }
 
+public enum RGBAType: String {
+    case red, blue, green, alpha
+}
+
 /// JNParser - this is the primary json parse interface.  It's primary fuctions are to serialize (stringify) objects to json
 /// strings or to prase strings to return a object graph
 public struct JNParser: JSONParserType, JSONDateType {
@@ -97,12 +101,47 @@ public struct JNParser: JSONParserType, JSONDateType {
         return array
     }
 
+    /// convert a UIColor to rbga map
+    public func colorToMap(color:UIColor) -> [String:Double] {
+        var r:CGFloat = 0.0
+        var g:CGFloat = 0.0
+        var b:CGFloat = 0.0
+        var a:CGFloat = 0.0
+
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
+
+        let map = [
+            RGBAType.red.rawValue:Double(r),
+            RGBAType.green.rawValue:Double(g),
+            RGBAType.blue.rawValue:Double(b),
+            RGBAType.alpha.rawValue:Double(a)
+        ]
+
+        return map
+    }
+
+    /// convert a map to UIColor object or return nil
+    public func colorFromMap(colorNode:[String:AnyObject]) -> UIColor? {
+        guard let r = colorNode[ RGBAType.red.rawValue ] as? CGFloat,
+            let g = colorNode[ RGBAType.green.rawValue ] as? CGFloat,
+            let b = colorNode[ RGBAType.blue.rawValue ] as? CGFloat,
+            let a = colorNode[ RGBAType.alpha.rawValue ] as? CGFloat else {
+
+                return nil
+        }
+
+        return UIColor(red:r, green:g, blue:b, alpha:a)
+    }
+
+    /// prepare the map by converting NSDate and UIColor
     public func prepareObjectMap(map:[String:AnyObject]) -> [String:AnyObject] {
         var obj = [String:AnyObject]()
 
         // walk the object to convert all dates to strings: won't handle an array of dates, but that's unlikely...
         for (key, value) in map {
             switch value {
+            case let color as UIColor:
+                obj[ key ] = colorToMap( color )
             case let date as NSDate:
                 obj[ key ] = stringFromDate( date )
             case let objMap as [String:AnyObject]:
@@ -117,14 +156,17 @@ public struct JNParser: JSONParserType, JSONDateType {
         return obj
     }
 
+    /// return the unix timestamp
     public func createUnixTimestamp() -> UnixTimestamp {
         return formatter.createUnixTimestamp()
     }
 
+    /// given a map<string:anyobject> convert to a json string
     public func stringify(map: [String : AnyObject]) -> String? {
         return self.stringify(map, pretty: false)
     }
 
+    /// given a map<string:anyobject> convert to a json string
     public func stringify(map:[String:AnyObject], pretty:Bool? = false) -> String? {
         let obj = prepareObjectMap( map )
 
@@ -156,9 +198,8 @@ public struct JNParser: JSONParserType, JSONDateType {
         return nil
     }
 
+    /// parse the string and return map or nil
     public func parse(jsonString: String) -> [String:AnyObject]? {
-
-        // TODO: implement me
         guard let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding) else {
             NSLog("\( __FUNCTION__ ): parse error in json string: \( jsonString )")
             return nil

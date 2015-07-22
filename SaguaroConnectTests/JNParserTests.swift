@@ -22,7 +22,7 @@ class JNParserTests: XCTestCase {
         XCTAssertNotNil(jstr, "should not be nil")
 
         // not a great test, but it should return predictable results...
-        XCTAssertEqual(jstr.characters.count, 510, "should match the character count")
+        XCTAssertEqual(jstr.characters.count, 753, "should match the character count")
     }
 
     func testStringify() {
@@ -34,7 +34,7 @@ class JNParserTests: XCTestCase {
         XCTAssertNotNil(jstr, "should not be nil")
 
         // not a great test, but it should return predictable non-pretty length...
-        XCTAssertEqual(jstr.characters.count, 371, "should match the character count")
+        XCTAssertEqual(jstr.characters.count, 518, "should match the character count")
     }
 
     func testParse() {
@@ -46,7 +46,7 @@ class JNParserTests: XCTestCase {
 
         let jstr = jnparser.stringify( complexMap )!
 
-        // print( jstr )
+        print( jstr )
 
         XCTAssertNotNil(jstr, "json string should not be nil")
 
@@ -146,6 +146,23 @@ class JNParserTests: XCTestCase {
         XCTAssertEqual( wrapper.ts, ts, "wrapper time stamp should match")
         XCTAssertEqual( wrapper.version, "1.0", "version match")
         XCTAssertEqual( wrapper.reason, "the reason it failed", "reason match")
+    }
+
+    func testColorFromMap() {
+        let map = [
+            RGBAType.red.rawValue:0.333,
+            RGBAType.green.rawValue:0.666,
+            RGBAType.blue.rawValue:0.9,
+            RGBAType.alpha.rawValue:0.5
+        ]
+
+        guard let color = jnparser.colorFromMap( map ) else {
+            XCTFail("should convert map to color")
+            return
+        }
+
+        print( color )
+
     }
     
 }

@@ -42,6 +42,7 @@ class CacheTests: XCTestCase {
         XCTAssertEqual(item["id"] as! String, id, "id match")
     }
 
+
     func testClearAll() {
 
         let parser = factory.dataModelParser.customerParser

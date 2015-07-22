@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "SaguaroConnect"
-  s.version     = "0.90.18"
+  s.version     = "0.90.19"
   s.summary     = "A swift 2.0 HTTP Session connection wrapper for iOS/OSX applications"
   s.homepage    = "https://github.com/darrylwest/saguaro-connect"
   s.license     = { :type => "MIT" }

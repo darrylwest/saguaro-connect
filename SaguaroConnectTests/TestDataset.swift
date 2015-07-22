@@ -37,7 +37,8 @@ class TestDataset {
         model[ "jobs" ] = [
             "job1":"my job 1",
             "job2":"my second job",
-            "job 3":"my third job"
+            "job 3":"my third job",
+            "color":UIColor(red: 100.0/255, green:110.0/255, blue:120.0/255, alpha: 1.0)
         ]
 
         let obj:[String:AnyObject] = [
@@ -46,6 +47,7 @@ class TestDataset {
             "height": height,
             "created": created,
             "hasHair": false,
+            "newcolor": UIColor.blueColor(),
             "nullvalue":NSNull(),
             "model":model
         ]
