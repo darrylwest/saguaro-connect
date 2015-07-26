@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SaguaroJSON
 import SaguaroConnect
 
 class TestDataset {

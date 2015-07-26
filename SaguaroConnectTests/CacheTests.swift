@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SaguaroJSON
 import SaguaroConnect
 
 class CacheTests: XCTestCase {

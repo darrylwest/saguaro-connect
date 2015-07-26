@@ -7,6 +7,7 @@
 //
 
 import XCTest
+
 @testable import SaguaroConnect
 
 class SARemoteServiceTests: XCTestCase {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SaguaroJSON
 
 /// Cache - backed by map[String:AnyObject] to persist to disk similar to mongo/redis/etc.
 /// NOTES:

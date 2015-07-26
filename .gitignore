@@ -6,4 +6,5 @@ __MACOSX
 *.log
 build/
 *.pbxuser
-
+Pods
+Podfile.lock

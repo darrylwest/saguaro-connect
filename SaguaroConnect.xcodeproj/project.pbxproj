@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A64476FF73D7A9E692D46DA /* Pods_SaguaroConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF2DDE28B011746503FCE24 /* Pods_SaguaroConnect.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BA2AB2FD1B5D3DAF0092F99B /* SARemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */; };
 		BA2AB2FF1B5D4E9C0092F99B /* SARemoteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */; };
 		BA2AB3011B5D72DF0092F99B /* InternetReachabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */; };
@@ -21,10 +22,9 @@
 		BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028511B3A4CCE00715013 /* SAConnectTests.swift */; };
 		BA8640A61B5EB5F40059D95B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8640A51B5EB5F40059D95B /* Cache.swift */; };
 		BA8640A81B5EB60A0059D95B /* CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8640A71B5EB60A0059D95B /* CacheTests.swift */; };
-		BAA5EA1D1B5E92E600D3EB94 /* JNParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA1C1B5E92E600D3EB94 /* JNParser.swift */; };
-		BAA5EA1F1B5E932400D3EB94 /* JNParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA1E1B5E932400D3EB94 /* JNParserTests.swift */; };
 		BAA5EA211B5E938C00D3EB94 /* TestDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */; };
 		BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB26CD21B3B10F4005F772C /* JustTests.swift */; };
+		C92E57BC68FB445EB6B7886F /* Pods_SaguaroConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51EF2FBB6A5D84E5D6CB7ABD /* Pods_SaguaroConnectTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0BA855C236ABA09FB69BC76A /* Pods-SaguaroConnectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaguaroConnectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SaguaroConnectTests/Pods-SaguaroConnectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		51EF2FBB6A5D84E5D6CB7ABD /* Pods_SaguaroConnectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaguaroConnectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54506080EFDE710ACA06E645 /* Pods-SaguaroConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaguaroConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SaguaroConnect/Pods-SaguaroConnect.debug.xcconfig"; sourceTree = "<group>"; };
+		5A1B282D4990C533D3B7B679 /* Pods-SaguaroConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaguaroConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-SaguaroConnect/Pods-SaguaroConnect.release.xcconfig"; sourceTree = "<group>"; };
+		9DF2DDE28B011746503FCE24 /* Pods_SaguaroConnect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaguaroConnect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SARemoteService.swift; sourceTree = "<group>"; };
 		BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SARemoteServiceTests.swift; sourceTree = "<group>"; };
 		BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetReachabilityTests.swift; sourceTree = "<group>"; };
@@ -55,10 +60,9 @@
 		BA3028511B3A4CCE00715013 /* SAConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnectTests.swift; sourceTree = "<group>"; };
 		BA8640A51B5EB5F40059D95B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		BA8640A71B5EB60A0059D95B /* CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTests.swift; sourceTree = "<group>"; };
-		BAA5EA1C1B5E92E600D3EB94 /* JNParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNParser.swift; sourceTree = "<group>"; };
-		BAA5EA1E1B5E932400D3EB94 /* JNParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JNParserTests.swift; sourceTree = "<group>"; };
 		BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDataset.swift; sourceTree = "<group>"; };
 		BAB26CD21B3B10F4005F772C /* JustTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
+		EC81325A9589CB475BB3A498 /* Pods-SaguaroConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaguaroConnectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SaguaroConnectTests/Pods-SaguaroConnectTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A64476FF73D7A9E692D46DA /* Pods_SaguaroConnect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,18 +79,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3028361B3A27CA00715013 /* SaguaroConnect.framework in Frameworks */,
+				C92E57BC68FB445EB6B7886F /* Pods_SaguaroConnectTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B3994652D1ACADB659804C0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54506080EFDE710ACA06E645 /* Pods-SaguaroConnect.debug.xcconfig */,
+				5A1B282D4990C533D3B7B679 /* Pods-SaguaroConnect.release.xcconfig */,
+				0BA855C236ABA09FB69BC76A /* Pods-SaguaroConnectTests.debug.xcconfig */,
+				EC81325A9589CB475BB3A498 /* Pods-SaguaroConnectTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BA3028211B3A27CA00715013 = {
 			isa = PBXGroup;
 			children = (
 				BA30282D1B3A27CA00715013 /* SaguaroConnect */,
 				BA3028391B3A27CA00715013 /* SaguaroConnectTests */,
 				BA30282C1B3A27CA00715013 /* Products */,
+				7B3994652D1ACADB659804C0 /* Pods */,
+				C82FE43C4CA2015345AEB0EB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,7 +126,6 @@
 				BA30284F1B3A4C6A00715013 /* SAConnect.swift */,
 				BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */,
 				BA2AB3021B5D735F0092F99B /* InternetReachability.swift */,
-				BAA5EA1C1B5E92E600D3EB94 /* JNParser.swift */,
 				BA8640A51B5EB5F40059D95B /* Cache.swift */,
 			);
 			path = SaguaroConnect;
@@ -121,7 +139,6 @@
 				BA3028511B3A4CCE00715013 /* SAConnectTests.swift */,
 				BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */,
 				BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */,
-				BAA5EA1E1B5E932400D3EB94 /* JNParserTests.swift */,
 				BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */,
 				BA8640A71B5EB60A0059D95B /* CacheTests.swift */,
 			);
@@ -147,6 +164,15 @@
 			name = core;
 			sourceTree = "<group>";
 		};
+		C82FE43C4CA2015345AEB0EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DF2DDE28B011746503FCE24 /* Pods_SaguaroConnect.framework */,
+				51EF2FBB6A5D84E5D6CB7ABD /* Pods_SaguaroConnectTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -165,10 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA30283F1B3A27CA00715013 /* Build configuration list for PBXNativeTarget "SaguaroConnect" */;
 			buildPhases = (
+				BC3BD34B28DCD2524B41DEE0 /* Check Pods Manifest.lock */,
 				BA3028261B3A27CA00715013 /* Sources */,
 				BA3028271B3A27CA00715013 /* Frameworks */,
 				BA3028281B3A27CA00715013 /* Headers */,
 				BA3028291B3A27CA00715013 /* Resources */,
+				81BF7AC07AC1DF112500A648 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -183,9 +211,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA3028421B3A27CA00715013 /* Build configuration list for PBXNativeTarget "SaguaroConnectTests" */;
 			buildPhases = (
+				87D8977774688ADEC478B915 /* Check Pods Manifest.lock */,
 				BA3028311B3A27CA00715013 /* Sources */,
 				BA3028321B3A27CA00715013 /* Frameworks */,
 				BA3028331B3A27CA00715013 /* Resources */,
+				2AAB53C63E0F20E190A94139 /* Embed Pods Frameworks */,
+				79BCDF730C1186164A1FB07E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,6 +281,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2AAB53C63E0F20E190A94139 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SaguaroConnectTests/Pods-SaguaroConnectTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79BCDF730C1186164A1FB07E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SaguaroConnectTests/Pods-SaguaroConnectTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81BF7AC07AC1DF112500A648 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SaguaroConnect/Pods-SaguaroConnect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87D8977774688ADEC478B915 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BC3BD34B28DCD2524B41DEE0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA3028261B3A27CA00715013 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -262,7 +371,6 @@
 				BA2AB2FD1B5D3DAF0092F99B /* SARemoteService.swift in Sources */,
 				BA2AB3031B5D735F0092F99B /* InternetReachability.swift in Sources */,
 				BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */,
-				BAA5EA1D1B5E92E600D3EB94 /* JNParser.swift in Sources */,
 				BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +379,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAA5EA1F1B5E932400D3EB94 /* JNParserTests.swift in Sources */,
 				BA2AB2FF1B5D4E9C0092F99B /* SARemoteServiceTests.swift in Sources */,
 				BAA5EA211B5E938C00D3EB94 /* TestDataset.swift in Sources */,
 				BA8640A81B5EB60A0059D95B /* CacheTests.swift in Sources */,
@@ -329,7 +436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -371,7 +478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -383,6 +490,7 @@
 		};
 		BA3028401B3A27CA00715013 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54506080EFDE710ACA06E645 /* Pods-SaguaroConnect.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -391,6 +499,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SaguaroConnect/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raincitysoftware.com.SaguaroConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,6 +510,7 @@
 		};
 		BA3028411B3A27CA00715013 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A1B282D4990C533D3B7B679 /* Pods-SaguaroConnect.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -409,6 +519,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SaguaroConnect/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raincitysoftware.com.SaguaroConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +529,7 @@
 		};
 		BA3028431B3A27CA00715013 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BA855C236ABA09FB69BC76A /* Pods-SaguaroConnectTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SaguaroConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -428,6 +540,7 @@
 		};
 		BA3028441B3A27CA00715013 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC81325A9589CB475BB3A498 /* Pods-SaguaroConnectTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SaguaroConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
