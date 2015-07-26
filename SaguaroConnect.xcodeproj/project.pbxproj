@@ -123,10 +123,10 @@
 				BA3028451B3A4AF800715013 /* core */,
 				BA30282E1B3A27CA00715013 /* SaguaroConnect.h */,
 				BA3028301B3A27CA00715013 /* Info.plist */,
+				BA8640A51B5EB5F40059D95B /* Cache.swift */,
 				BA30284F1B3A4C6A00715013 /* SAConnect.swift */,
 				BA2AB2FC1B5D3DAF0092F99B /* SARemoteService.swift */,
 				BA2AB3021B5D735F0092F99B /* InternetReachability.swift */,
-				BA8640A51B5EB5F40059D95B /* Cache.swift */,
 			);
 			path = SaguaroConnect;
 			sourceTree = "<group>";
@@ -136,11 +136,11 @@
 			children = (
 				BA3028461B3A4B1700715013 /* core */,
 				BA30283C1B3A27CA00715013 /* Info.plist */,
+				BA8640A71B5EB60A0059D95B /* CacheTests.swift */,
+				BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */,
 				BA3028511B3A4CCE00715013 /* SAConnectTests.swift */,
 				BA2AB2FE1B5D4E9C0092F99B /* SARemoteServiceTests.swift */,
-				BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */,
 				BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */,
-				BA8640A71B5EB60A0059D95B /* CacheTests.swift */,
 			);
 			path = SaguaroConnectTests;
 			sourceTree = "<group>";
