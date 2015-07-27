@@ -148,7 +148,7 @@ public class Just: NSObject, NSURLSessionDelegate {
     
     
     func makeTask(request:NSURLRequest, configuration: TaskConfiguration) -> NSURLSessionDataTask? {
-        if let task = session.dataTaskWithRequest(request) {
+        if let task:NSURLSessionDataTask = session.dataTaskWithRequest(request) {
             taskConfigs[task.taskIdentifier] = configuration
             return task
         }
