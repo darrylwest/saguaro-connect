@@ -68,7 +68,6 @@ public class SAQueryRequest: SARemoteRequest {
     }
 }
 
-
 class SARemoteService: SARemoteServiceType {
     let serviceName:String
 
