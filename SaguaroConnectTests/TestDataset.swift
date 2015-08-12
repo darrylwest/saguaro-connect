@@ -48,12 +48,7 @@ class TestDataset {
         return map
     }
 
-    func createComplexJSONMap() -> [String:AnyObject] {
-        let name = "farley"
-        let age = 42
-        let height = 4.3
-        let created = jnparser.dateFromString( "2015-06-18T09:47:49.427+0000" )!
-
+    func createModel() -> [String:AnyObject] {
         var model = createDocumentIdentifierMap()
         model[ "names" ] = ["jon","jane","joe"]
         model[ "jobs" ] = [
@@ -62,6 +57,28 @@ class TestDataset {
             "job 3":"my third job",
             "color":UIColor(red: 100.0/255, green:110.0/255, blue:120.0/255, alpha: 1.0)
         ]
+
+        return model
+    }
+
+    func createModelList(count:Int? = 20) -> [[String:AnyObject]] {
+        var list = [[String:AnyObject]]()
+        var cc = count!
+
+        while (cc-- > 0) {
+            list.append( createModel() )
+        }
+
+        return list
+    }
+
+    func createComplexJSONMap() -> [String:AnyObject] {
+        let name = "farley"
+        let age = 42
+        let height = 4.3
+        let created = jnparser.dateFromString( "2015-06-18T09:47:49.427+0000" )!
+
+        let model = createModel()
 
         let obj:[String:AnyObject] = [
             "name": name,

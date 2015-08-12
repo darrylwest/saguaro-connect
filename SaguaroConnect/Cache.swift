@@ -22,7 +22,7 @@ public class Cache {
     var cache = [String:AnyObject]()
     public let cacheFile:String
 
-    // this is the index to all cache items
+    /// this is the index to all cache items
     final public var count:Int {
         return cache.count
     }
@@ -62,6 +62,21 @@ public class Cache {
         }
 
         return item
+    }
+
+    public func queryByField(field:String, value:String) -> [AnyObject] {
+        let search = value.lowercaseString
+        var list = [AnyObject]()
+
+        for (_, obj) in cache {
+            if let val = obj[ field ] as? String {
+                if val.lowercaseString.hasPrefix( search ) {
+                    list.append( obj )
+                }
+            }
+        }
+
+        return list
     }
 
     /// clear all objects from the cache; this does not remove or affect the cache file

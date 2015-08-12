@@ -24,7 +24,21 @@ class CacheTests: XCTestCase {
         XCTAssertEqual(ca.count, 0, "should have zero entries")
     }
 
-    func testLoadCache() {
+    func testSearch() {
+        if (cache.count == 0) {
+            loadCache()
+        }
+
+        XCTAssert( true )
+
+        let c1 = cache.queryByField("name", value:"sa")
+        XCTAssertEqual(c1.count, 10, "search for 'sa' should yeild 10")
+
+        let c2 = cache.queryByField("name", value: "sch")
+        XCTAssertEqual(c2.count, 40, "search for 'sa' should yeild 10")
+    }
+
+    func loadCache() {
         guard let text = dataset.readFixtureFile("customer-list.json") else {
             return XCTFail("could not read text file")
         }
@@ -49,17 +63,14 @@ class CacheTests: XCTestCase {
         XCTAssertEqual(customers.count, cache.count, "counts")
     }
 
-/*
     func testSaveKeyValue() {
-        let parser = factory.dataModelParser.customerParser
-        let cache = Cache(name: "TestCustomer" )
+        let model = dataset.createModel()
+        let cache = Cache(name: "Test" )
 
-        let customer = dataset.createCustomer( "My Test Customer" )
-        let id = customer.doi.id
-        let obj = parser.toMap( customer )
+        let id = model[ "id" ] as! String
 
         XCTAssertEqual(cache.count, 0, "should have zero entries")
-        cache.saveKeyValue(obj, id: id)
+        cache.saveKeyValue(model, id: id)
         XCTAssertEqual(cache.count, 1, "should have one entry")
 
         guard let item = cache.findKeyValueById( id ) else {
@@ -72,46 +83,36 @@ class CacheTests: XCTestCase {
 
 
     func testClearAll() {
-
-        let parser = factory.dataModelParser.customerParser
-        let cache = Cache(name: "TestCustomer" )
+        let cache = Cache(name: "Test" )
         let count = 100
 
-        let list = dataset.createCustomerList(count)
+        let list = dataset.createModelList( count )
 
-        for customer in list {
-            let id = customer.doi.id
-            let obj = parser.toMap( customer )
+        for item in list {
+            let id = item["id"] as! String
 
-            cache.saveKeyValue(obj, id: id)
+            cache.saveKeyValue(item, id: id)
         }
 
         XCTAssertEqual(cache.count, count, "count match")
         cache.clearAll()
         XCTAssertEqual(cache.count, 0, "should be zero")
 
-        for customer in list {
-            let id = customer.doi.id
-
-            let item = cache.findKeyValueById(id)
-
-            XCTAssertNil( item )
-        }
     }
 
     func testCreateJSON() {
-        let parser = factory.dataModelParser.customerParser
-        let cache = Cache(name: "TestCustomer" )
+        let cache = Cache(name: "Test" )
         let count = 10
 
-        let list = dataset.createCustomerList(count)
+        let list = dataset.createModelList(count)
 
-        for customer in list {
-            let id = customer.doi.id
-            let obj = parser.toMap( customer )
+        for item in list {
+            let id = item["id"] as! String
 
-            cache.saveKeyValue(obj, id: id)
+            cache.saveKeyValue(item, id: id)
         }
+
+        XCTAssertEqual(cache.count, count, "count match")
 
         guard let json = cache.createJSON( "customers" ) else {
             XCTFail("failed to create json string")
@@ -125,17 +126,15 @@ class CacheTests: XCTestCase {
     }
 
     func testWriteCacheToDisk() {
-        let parser = factory.dataModelParser.customerParser
-        let cache = Cache(name: "TestCustomer", cacheFile: Cache.createPermanentCachePath("test-customer") )
-        let count = 100
+        let cache = Cache(name: "Test" )
+        let count = 10
 
-        let list = dataset.createCustomerList(count)
+        let list = dataset.createModelList(count)
 
-        for customer in list {
-            let id = customer.doi.id
-            let obj = parser.toMap( customer )
+        for item in list {
+            let id = item["id"] as! String
 
-            cache.saveKeyValue(obj, id: id)
+            cache.saveKeyValue(item, id: id)
         }
 
         let json = cache.createJSON( "customers" )!
@@ -167,42 +166,5 @@ class CacheTests: XCTestCase {
         }
     }
 
-    func testReadCacheFromDisk() {
-        let parser = factory.dataModelParser.customerParser
-        let cache = Cache(name: "TestCustomer" )
-        let count = 100
-
-        let list = dataset.createCustomerList(count)
-
-        for customer in list {
-            let id = customer.doi.id
-            let obj = parser.toMap( customer )
-
-            cache.saveKeyValue(obj, id: id)
-        }
-
-        let json = cache.createJSON( "customers" )!
-        let ok = cache.writeCacheToDisk(json)
-
-        XCTAssert( ok == true, "should return true")
-
-        print("cache: \( cache.cacheFile )")
-
-        if let contents = cache.readCacheFromDisk() {
-            print( contents )
-            XCTAssert(contents.characters.count > 100, "should have a reasonable amount of characters")
-        } else {
-            XCTFail("could not read file")
-        }
-        
-        
-        do {
-            // now remove it
-            let fileManager = NSFileManager.defaultManager()
-            try fileManager.removeItemAtPath( cache.cacheFile )
-        } catch {
-            print("warning! file could not be removed: \( cache.cacheFile )")
-        }
-    }
-   */ 
+    // TODO read from disk
 }
