@@ -64,19 +64,28 @@ public class Cache {
         return item
     }
 
-    public func queryByField(field:String, value:String) -> [AnyObject] {
+    /// searches by lowercased prefix and returns list of item, i.e., models sorted by the field
+    public func queryByField(field:String, value:String) -> [[String:AnyObject]] {
         let search = value.lowercaseString
-        var list = [AnyObject]()
+        var list = [[String:AnyObject]]()
 
         for (_, obj) in cache {
             if let val = obj[ field ] as? String {
                 if val.lowercaseString.hasPrefix( search ) {
-                    list.append( obj )
+                    list.append( obj as! [String:AnyObject] )
                 }
             }
         }
 
-        return list
+        let sorted = list.sort { v1, v2 in
+            if let s1 = v1[ field ] as? String, s2 = v2[ field ] as? String {
+                return s1 < s2
+            } else {
+                return false
+            }
+        }
+
+        return sorted
     }
 
     /// clear all objects from the cache; this does not remove or affect the cache file

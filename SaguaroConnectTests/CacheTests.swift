@@ -24,20 +24,6 @@ class CacheTests: XCTestCase {
         XCTAssertEqual(ca.count, 0, "should have zero entries")
     }
 
-    func testSearch() {
-        if (cache.count == 0) {
-            loadCache()
-        }
-
-        XCTAssert( true )
-
-        let c1 = cache.queryByField("name", value:"sa")
-        XCTAssertEqual(c1.count, 10, "search for 'sa' should yeild 10")
-
-        let c2 = cache.queryByField("name", value: "sch")
-        XCTAssertEqual(c2.count, 40, "search for 'sa' should yeild 10")
-    }
-
     func loadCache() {
         guard let text = dataset.readFixtureFile("customer-list.json") else {
             return XCTFail("could not read text file")
@@ -62,6 +48,32 @@ class CacheTests: XCTestCase {
 
         XCTAssertEqual(customers.count, cache.count, "counts")
     }
+
+    func testSearch() {
+        if (cache.count == 0) {
+            loadCache()
+        }
+
+        XCTAssert( true )
+
+        let c1 = cache.queryByField("name", value:"sa")
+        XCTAssertEqual(c1.count, 10, "search for 'sa' should yeild 10")
+
+        /*
+        for item in c1 {
+            let name = item[ "name" ] as! String
+
+            let id = item[ "id" ] as! String
+
+            print( "\( name ) \( id )" )
+        }
+        */
+
+        let c2 = cache.queryByField("name", value: "sch")
+        XCTAssertEqual(c2.count, 40, "search for 'sa' should yeild 10")
+    }
+
+
 
     func testSaveKeyValue() {
         let model = dataset.createModel()
