@@ -13,15 +13,42 @@ import SaguaroConnect
 class CacheTests: XCTestCase {
     let dataset = TestDataset()
     let jnparser = JNParser()
+    let cache = Cache(name: "TestCustomer")
     
     func testInstance() {
-        let cache = Cache(name: "Test" )
+        let ca = Cache(name: "Test" )
 
-        XCTAssertNotNil(cache, "cache should exist")
-        XCTAssertNotEqual(cache.cacheFile, "", "should have a valid folder")
-        XCTAssert(cache.cacheFile.hasSuffix( "Library/Caches/com.vecore.caches/test.json" ))
-        XCTAssertEqual(cache.count, 0, "should have zero entries")
+        XCTAssertNotNil(ca, "cache should exist")
+        XCTAssertNotEqual(ca.cacheFile, "", "should have a valid folder")
+        XCTAssert(ca.cacheFile.hasSuffix( "Library/Caches/com.vecore.caches/test.json" ))
+        XCTAssertEqual(ca.count, 0, "should have zero entries")
     }
+
+    func testLoadCache() {
+        guard let text = dataset.readFixtureFile("customer-list.json") else {
+            return XCTFail("could not read text file")
+        }
+
+        guard let obj = JSON.parse( text ) else {
+            return XCTFail("could not parse customer list response")
+        }
+
+        guard let customers = obj["customers"] as? [[String:AnyObject]] else {
+            return XCTFail("could not parse customers")
+        }
+
+        XCTAssertEqual(customers.count, 820, "customer count")
+
+        for var i = 0; i < customers.count; i++ {
+            let obj = customers[ i ]
+            let id = obj[ "id" ] as! String
+
+            cache.saveKeyValue( obj, id: id )
+        }
+
+        XCTAssertEqual(customers.count, cache.count, "counts")
+    }
+
 /*
     func testSaveKeyValue() {
         let parser = factory.dataModelParser.customerParser

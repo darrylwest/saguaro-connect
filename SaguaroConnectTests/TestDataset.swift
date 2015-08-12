@@ -13,6 +13,27 @@ import SaguaroConnect
 class TestDataset {
     let jnparser = JNParser()
 
+    var fixturePath:String {
+        var parts = split(__FILE__.characters) { $0 == "/" }.map { String($0) }
+
+        parts.removeLast()
+
+        return "/" + "/".join( parts )
+    }
+
+    func readFixtureFile(filename:String) -> String? {
+        let path = fixturePath + "/" + filename
+
+        do {
+            let text = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+
+            return text
+        } catch let error as NSError {
+            NSLog("error reading \( path ) : \(error)")
+            return nil
+        }
+    }
+
     func createDocumentIdentifierMap() -> [String:AnyObject] {
         let uuid = NSUUID().UUIDString.lowercaseString
         let mid = uuid.stringByReplacingOccurrencesOfString("-", withString:"")
@@ -55,4 +76,6 @@ class TestDataset {
 
         return obj
     }
+
+
 }

@@ -24,6 +24,7 @@
 		BA8640A81B5EB60A0059D95B /* CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8640A71B5EB60A0059D95B /* CacheTests.swift */; };
 		BAA5EA211B5E938C00D3EB94 /* TestDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */; };
 		BAB26CD31B3B10F4005F772C /* JustTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB26CD21B3B10F4005F772C /* JustTests.swift */; };
+		BAB956311B7BE356000A8E2E /* customer-list.json in Resources */ = {isa = PBXBuildFile; fileRef = BAB956301B7BE356000A8E2E /* customer-list.json */; };
 		C92E57BC68FB445EB6B7886F /* Pods_SaguaroConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51EF2FBB6A5D84E5D6CB7ABD /* Pods_SaguaroConnectTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		BA8640A71B5EB60A0059D95B /* CacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheTests.swift; sourceTree = "<group>"; };
 		BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDataset.swift; sourceTree = "<group>"; };
 		BAB26CD21B3B10F4005F772C /* JustTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustTests.swift; sourceTree = "<group>"; };
+		BAB956301B7BE356000A8E2E /* customer-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-list.json"; sourceTree = "<group>"; };
 		EC81325A9589CB475BB3A498 /* Pods-SaguaroConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaguaroConnectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SaguaroConnectTests/Pods-SaguaroConnectTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				BA3028461B3A4B1700715013 /* core */,
+				BAB956301B7BE356000A8E2E /* customer-list.json */,
 				BA30283C1B3A27CA00715013 /* Info.plist */,
 				BA8640A71B5EB60A0059D95B /* CacheTests.swift */,
 				BA2AB3001B5D72DF0092F99B /* InternetReachabilityTests.swift */,
@@ -276,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB956311B7BE356000A8E2E /* customer-list.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
