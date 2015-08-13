@@ -21,6 +21,8 @@ public class Cache {
 
     var cache = [String:AnyObject]()
     public let cacheFile:String
+    
+    public var lastRefresh:NSDate = NSDate.distantPast()
 
     /// this is the index to all cache items
     final public var count:Int {
