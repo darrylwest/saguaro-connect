@@ -22,6 +22,7 @@ public class Cache {
     var cache = [String:AnyObject]()
     public let cacheFile:String
     
+    // TODO : create a mutator for this...
     public var lastRefresh:NSDate = NSDate.distantPast()
 
     /// this is the index to all cache items
@@ -30,6 +31,11 @@ public class Cache {
     }
 
     public let name:String
+    
+    public func getItems() -> [String:AnyObject] {
+        // make a copy?
+        return cache
+    }
 
     public init(name:String, cacheFile:String? = nil) {
         jnparser = JNParser()

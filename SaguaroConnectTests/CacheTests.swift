@@ -48,6 +48,21 @@ class CacheTests: XCTestCase {
 
         XCTAssertEqual(customers.count, cache.count, "counts")
     }
+    
+    func testGetItems() {
+        if (cache.count == 0) {
+            loadCache()
+        }
+        
+        let items = cache.getItems()
+        XCTAssertEqual(items.count, 820, "count")
+        
+        let map = items.map {
+            return $0
+        }
+        
+        XCTAssertEqual(map.count, items.count, "map count")
+    }
 
     func testSearch() {
         if (cache.count == 0) {
@@ -72,8 +87,6 @@ class CacheTests: XCTestCase {
         let c2 = cache.queryByField("name", value: "sch")
         XCTAssertEqual(c2.count, 40, "search for 'sa' should yeild 10")
     }
-
-
 
     func testSaveKeyValue() {
         let model = dataset.createModel()
