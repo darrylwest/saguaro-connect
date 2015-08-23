@@ -167,6 +167,63 @@ public class Cache {
         return false
     }
 
+    /// find the latest update based on parameter "lastUpdated" (complient with data model DOI)
+    final public func findLatestUpdateDate() -> NSDate {
+        var latestDate = NSDate(timeIntervalSinceReferenceDate: 0.0)
+
+        for (_,item) in getItems() {
+            if let map = item as? [String:AnyObject] {
+                if let date = jnparser.parseDate( map[ "lastUpdated" ]) {
+                    if latestDate.compare( date ) == NSComparisonResult.OrderedAscending {
+                        latestDate = date
+                    }
+                }
+            }
+        }
+
+        return latestDate
+    }
+
+    /// write the cached data models to local disk with standard wrapper
+    final public func syncToDisk(listName:String) -> Bool {
+        guard let json = createJSON( listName ) else { return false }
+        return writeCacheToDisk( json )
+    }
+
+    /// read the data models from local disk and save to cache; data models must include an id
+    final public func syncFromDisk(listName:String) -> (Int?, NSError?) {
+        guard let str = readCacheFromDisk() else {
+            return (0, nil)
+        }
+
+        let (jobj, wrap, err) = parseJSONResponse( str )
+
+        if let error = err {
+            return (nil, error)
+        }
+
+        guard let jsonObject = jobj, wrapper = wrap else {
+            return (nil, err)
+        }
+
+        if wrapper.isOk == false {
+            return (nil, NSError(domain: name, code: Cache.JSON_PARSE_ERROR_CODE, userInfo: [ "reason": wrapper.reason ]))
+        }
+
+        guard let list = jsonObject[ listName ] as? [[String:AnyObject]] else {
+            return (nil, NSError(domain: name, code: Cache.JSON_PARSE_ERROR_CODE, userInfo: [ "reason":"could not locate list from name: \( listName )"]))
+        }
+
+        for item in list {
+            if let id = item["id"] as? String {
+                // no need to fully parse, just save the raw item
+                saveKeyValue( item, id: id )
+            }
+        }
+        
+        return (count, nil)
+    }
+
     /// create the cache folder from the specified cache file path
     final public func createCacheFolder() throws {
         let filename = fileManager.displayNameAtPath( cacheFile )
