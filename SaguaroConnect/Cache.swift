@@ -16,6 +16,8 @@ import SaguaroJSON
 ///     - JSON was used to serialize and make it easy to upload/download pre-loaded caches
 ///     - two directory options are offered-one in caches and another more stable location in Library
 public class Cache {
+    public static let JSON_PARSE_ERROR_CODE = 120
+    
     let jnparser:JNParser
     let fileManager:NSFileManager
 
@@ -112,6 +114,23 @@ public class Cache {
         let wrapper = JSONResponseWrapper.createWrapper(key:listName, value:list)
 
         return jnparser.stringify( wrapper )
+    }
+    
+    final public func parseJSONResponse(json:String) -> ([String:AnyObject]?, JSONResponseWrapper?, NSError?) {
+        func createError(reason:String) -> ([String:AnyObject]?, JSONResponseWrapper?, NSError?) {
+            let info = [ "parse": name, "reason": reason ]
+            return (nil, nil, NSError( domain: self.name, code: Cache.JSON_PARSE_ERROR_CODE, userInfo: info))
+        }
+        
+        guard let jsonObject = jnparser.parse( json ) else {
+            return createError("error parsing json string")
+        }
+        
+        guard let wrapper = JSONResponseWrapper( jsonObject: jsonObject ) else {
+            return createError("error creating wrapper from object \( jsonObject )")
+        }
+        
+        return (jsonObject, wrapper, nil)
     }
 
     /// read and return the cache file contents if they exist; read on startup if off-line

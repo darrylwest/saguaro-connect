@@ -169,6 +169,47 @@ class CacheTests: XCTestCase {
 
         print("path: \( cache.cacheFile )")
     }
+    
+    func testReadCacheFromDisk() {
+        let cache = Cache(name: "Test" )
+        guard let str = cache.readCacheFromDisk() else {
+            return XCTFail("could not read file")
+        }
+        print("string: \( str )")
+        XCTAssertNotNil( str, "should read something back")
+    }
+    
+    func testParseJSONResponse() {
+        let cache = Cache(name: "Test")
+        
+        guard let str = cache.readCacheFromDisk() else {
+            return XCTFail("could not read file")
+        }
+        print("string: \( str )")
+        
+        let (jobj, wrap, err) = cache.parseJSONResponse( str )
+        
+        XCTAssertNil( err, "error should be nil")
+        XCTAssertNotNil(jobj, "json should not be nil")
+        
+        guard let jsonObject = jobj else {
+            return XCTFail("could not create json object")
+        }
+        
+        guard let wrapper = wrap else {
+            print( "fail: \( wrap )" )
+            return XCTFail("wrapper should not be nil")
+        }
+        
+        XCTAssertEqual( wrapper.status, "ok", "status ok")
+        XCTAssertEqual( wrapper.isOk, true, "ok true")
+        
+        guard let list = jsonObject[ "customers" ] as? [[String:AnyObject]] else {
+            return XCTFail("could not locate customer list")
+        }
+        
+        XCTAssertEqual(list.count, 10, "verify customer count")
+    }
 
     func testCreateCacheFolder() {
         let cacheFolder = NSTemporaryDirectory() + "test-caches/"
@@ -190,6 +231,4 @@ class CacheTests: XCTestCase {
             XCTFail("failed to create folder for \(cacheFolder)")
         }
     }
-
-    // TODO read from disk
 }
