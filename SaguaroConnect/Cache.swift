@@ -34,7 +34,8 @@ public class Cache {
 
     public let name:String
     
-    public func getItems() -> [String:AnyObject] {
+    /// return all the cached items as an array of maps
+    final public func getItems() -> [String:AnyObject] {
         // make a copy?
         return cache
     }
