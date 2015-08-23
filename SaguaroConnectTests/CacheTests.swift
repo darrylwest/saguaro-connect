@@ -231,4 +231,35 @@ class CacheTests: XCTestCase {
             XCTFail("failed to create folder for \(cacheFolder)")
         }
     }
+
+    func testFindLatestUpdateDate() {
+        let cache = Cache(name: "Test")
+        let count = 10
+        var dates = [String]()
+
+        for (var i = 0; i < count; i++) {
+            let rt = NSTimeInterval( Double( arc4random_uniform( 100000000 )) + 1000000.0 )
+            let dt = NSDate( timeIntervalSinceReferenceDate: rt )
+            let id = "id-\( i )"
+
+            let obj = [
+                "id":id,
+                "lastUpdated":jnparser.stringFromDate( dt )
+            ]
+
+            dates.append( "\( dt )")
+
+            cache.saveKeyValue(obj, id: id)
+        }
+
+        let last = dates.sort().last!
+        print( last )
+
+        XCTAssertEqual( cache.count, count, "size" )
+
+        let date = cache.findLatestUpdateDate()
+        print( "latest: \( date )")
+
+        XCTAssertEqual("\( date )", "\( last )", "check latest")
+    }
 }
