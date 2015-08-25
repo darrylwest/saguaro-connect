@@ -179,6 +179,12 @@ class CacheTests: XCTestCase {
         XCTAssertNotNil( str, "should read something back")
     }
     
+    func testRemoveCacheFile() {
+        let cache = Cache(name: "Test")
+        
+        XCTAssert(cache.removeCacheFile(), "should return true")
+    }
+    
     func testParseJSONResponse() {
         let cache = Cache(name: "Test")
         

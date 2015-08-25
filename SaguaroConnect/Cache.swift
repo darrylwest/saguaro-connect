@@ -103,6 +103,20 @@ public class Cache {
     final public func clearAll() {
         cache.removeAll()
     }
+    
+    /// remove the cache file; return true if no errors
+    final public func removeCacheFile() -> Bool {
+        
+        let fileManager = NSFileManager.defaultManager()
+        do {
+            try fileManager.removeItemAtPath( cacheFile )
+        } catch let err {
+            NSLog("error removing cache file: \( err )")
+            return false
+        }
+        
+        return true
+    }
 
     /// read all keys from the cache index; copy all objects; wrap the object list and return as a json string
     final public func createJSON(listName:String) -> String? {
