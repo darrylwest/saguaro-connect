@@ -239,6 +239,26 @@ public class Cache {
         return (count, nil)
     }
 
+    // return a list of stats, filename, size, count, etc
+    public func listStats() -> [String:AnyObject] {
+        var stats:[String:AnyObject] = [
+            "name": self.name,
+            "filename": self.cacheFile,
+            "elementCount": self.cache.count
+        ]
+
+        do {
+            let fileAttrs = try fileManager.attributesOfItemAtPath( cacheFile )
+
+            stats[ "fileSize" ] = fileAttrs[ "fileSize" ]
+            stats[ "fileDate" ] = fileAttrs[ "fileModificationDate" ]
+        } catch let err {
+            stats[ "fileError" ] = err as NSError?
+        }
+
+        return stats
+    }
+
     /// create the cache folder from the specified cache file path
     final public func createCacheFolder() throws {
         let filename = fileManager.displayNameAtPath( cacheFile )

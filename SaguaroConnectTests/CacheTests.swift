@@ -177,6 +177,18 @@ class CacheTests: XCTestCase {
         }
         print("string: \( str )")
         XCTAssertNotNil( str, "should read something back")
+        
+        let stats = cache.listStats()
+        print( stats )
+    }
+
+    func testListStats() {
+
+        let cache = Cache(name: "Test")
+
+        let stats = cache.listStats()
+        print( stats )
+        XCTAssertNotNil( stats, "should not be nil")
     }
     
     func testRemoveCacheFile() {
@@ -268,4 +280,6 @@ class CacheTests: XCTestCase {
 
         XCTAssertEqual("\( date )", "\( last )", "check latest")
     }
+
+
 }
