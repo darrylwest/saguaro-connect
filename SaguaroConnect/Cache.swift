@@ -250,8 +250,8 @@ public class Cache {
         do {
             let fileAttrs = try fileManager.attributesOfItemAtPath( cacheFile )
 
-            stats[ "fileSize" ] = fileAttrs[ "fileSize" ]
-            stats[ "fileDate" ] = fileAttrs[ "fileModificationDate" ]
+            stats[ "fileSize" ] = fileAttrs[ "NSFileSize" ]
+            stats[ "fileDate" ] = fileAttrs[ "NSFileModificationDate" ]
         } catch let err {
             stats[ "fileError" ] = err as NSError?
         }

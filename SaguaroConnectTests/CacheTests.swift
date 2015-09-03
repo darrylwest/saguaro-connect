@@ -189,6 +189,12 @@ class CacheTests: XCTestCase {
         let stats = cache.listStats()
         print( stats )
         XCTAssertNotNil( stats, "should not be nil")
+
+        XCTAssertNotNil( stats[ "name" ], "should have name element")
+        XCTAssertNotNil( stats[ "filename" ], "should have filename element")
+        XCTAssertNotNil( stats[ "elementCount" ], "should have elementCount element")
+        XCTAssertNotNil( stats[ "fileSize" ], "should have fileSize element")
+        XCTAssertNotNil( stats[ "fileDate" ], "should have fileDate element")
     }
     
     func testRemoveCacheFile() {
