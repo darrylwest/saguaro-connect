@@ -112,20 +112,20 @@ public class Just: NSObject, NSURLSessionDelegate {
                 components += queryComponents("\(key)", value)
             }
         } else {
-            components.extend([(percentEncodeString(key), percentEncodeString("\(value)"))])
+            components.appendContentsOf([(percentEncodeString(key), percentEncodeString("\(value)"))])
         }
         
         return components
     }
     
     func query(parameters: [String: AnyObject]) -> String {
-        var components: [(String, String)] = []
+        var components = [String]()
         for key in Array(parameters.keys).sort(<) {
             let value: AnyObject! = parameters[key]
-            components += self.queryComponents(key, value)
+            components.append("\(key)=\(value)")
         }
-        
-        return "&".join(components.map{"\($0)=\($1)"} as [String])
+
+        return components.joinWithSeparator("&")
     }
     
     func percentEncodeString(originalObject: AnyObject) -> String {

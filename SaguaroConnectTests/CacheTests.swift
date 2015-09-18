@@ -103,7 +103,7 @@ class CacheTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(item["id"] as! String, id, "id match")
+        XCTAssertEqual(item["id"] as? String, id, "id match")
     }
 
 

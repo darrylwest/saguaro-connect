@@ -56,10 +56,10 @@ class SARemoteServiceTests: XCTestCase {
         XCTAssertNotNil(error.userInfo, "info should not be nil")
         XCTAssertEqual(error.userInfo.count, 7, "should have correctnumber of params")
 
-        XCTAssertEqual(error.userInfo[ "username" ] as! String, info["username"] as! String, "user name")
-        XCTAssertEqual(error.userInfo[ "session" ] as! String, info["session"] as! String, "session")
-        XCTAssertEqual(error.userInfo[ "loginTime" ] as! NSDate, info["loginTime"] as! NSDate, "time")
-        XCTAssertEqual(error.userInfo[ "count" ] as! Int, info["count"] as! Int, "time")
+        XCTAssertEqual(error.userInfo[ "username" ] as? String, info["username"] as? String, "user name")
+        XCTAssertEqual(error.userInfo[ "session" ] as? String, info["session"] as? String, "session")
+        XCTAssertEqual(error.userInfo[ "loginTime" ] as? NSDate, info["loginTime"] as? NSDate, "time")
+        XCTAssertEqual(error.userInfo[ "count" ] as? Int, info["count"] as? Int, "time")
     }
 
     func testCreateSimpleRemoteRequest() {
@@ -83,9 +83,9 @@ class SARemoteServiceTests: XCTestCase {
         let request = SAQueryRequest(params: params)
 
         XCTAssertNotNil(request, "should exist")
-        XCTAssertEqual(request.params[ "username" ] as! String, params["username"] as! String, "user name")
-        XCTAssertEqual(request.params[ "session" ] as! String, params["session"] as! String, "session")
-        XCTAssertEqual(request.params[ "loginTime" ] as! NSDate, params["loginTime"] as! NSDate, "time")
-        XCTAssertEqual(request.params[ "count" ] as! Int, params["count"] as! Int, "time")
+        XCTAssertEqual(request.params[ "username" ] as? String, params["username"] as? String, "user name")
+        XCTAssertEqual(request.params[ "session" ] as? String, params["session"] as? String, "session")
+        XCTAssertEqual(request.params[ "loginTime" ] as? NSDate, params["loginTime"] as? NSDate, "time")
+        XCTAssertEqual(request.params[ "count" ] as? Int, params["count"] as? Int, "time")
     }
 }

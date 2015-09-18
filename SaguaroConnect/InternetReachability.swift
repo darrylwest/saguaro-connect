@@ -40,7 +40,7 @@ public class InternetReachability: InternetReachableType {
             }
 
             var flags = SCNetworkReachabilityFlags.ConnectionAutomatic
-            if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == 0 {
+            if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
                 return false
             }
 
