@@ -51,7 +51,6 @@ public struct SAErrorType: SAServiceErrorType {
 }
 
 public class SARemoteRequest: SARemoteRequestModel {
-    static let jnparser = JNParser()
 
     final public let id:String
     final public let requestTime:NSTimeInterval
@@ -71,7 +70,7 @@ public class SAQueryRequest: SARemoteRequest {
 
         for (key, value) in params! {
             if let dt = value as? NSDate {
-                p[ key ] = SARemoteRequest.jnparser.stringFromDate( dt )
+                p[ key ] = JSON.jnparser.stringFromDate( dt )
             } else {
                 p[ key ] = value
             }

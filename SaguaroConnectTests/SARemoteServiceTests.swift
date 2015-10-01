@@ -75,9 +75,11 @@ class SARemoteServiceTests: XCTestCase {
 
     func testCreateQueryRequest() {
         let parser = JNParser()
-        let dts = "2015-10-01T02:26:56.244+0000"
-        guard let dt = parser.dateFromString( dts ) else {
-            return XCTFail("could not parse iso date string: \( dts )")
+        let dts1 = "2015-10-01T02:26:56.244+0000"
+        let dts2 = "2015-10-01T02:26:56.244Z"
+
+        guard let dt = parser.dateFromString( dts1 ) else {
+            return XCTFail("could not parse iso date string: \( dts1 )")
         }
 
         let params = [
@@ -94,7 +96,7 @@ class SARemoteServiceTests: XCTestCase {
         XCTAssertNotNil(request, "should exist")
         XCTAssertEqual(request.params[ "username" ] as? String, params["username"] as? String, "user name")
         XCTAssertEqual(request.params[ "session" ] as? String, params["session"] as? String, "session")
-        XCTAssertEqual(request.params[ "loginTime" ] as? String, dts, "time")
+        XCTAssertEqual(request.params[ "loginTime" ] as? String, dts2, "time")
         XCTAssertEqual(request.params[ "count" ] as? Int, params["count"] as? Int, "time")
     }
 }
