@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SaguaroJSON
 
 public enum SAResponseCallback<T1: Any, T2: ErrorType> {
     case Ok(T1)
@@ -50,6 +51,8 @@ public struct SAErrorType: SAServiceErrorType {
 }
 
 public class SARemoteRequest: SARemoteRequestModel {
+    static let jnparser = JNParser()
+
     final public let id:String
     final public let requestTime:NSTimeInterval
 
@@ -59,11 +62,22 @@ public class SARemoteRequest: SARemoteRequestModel {
     }
 }
 
+/// create with optional params; any object includes NSDate which gets set to JSON string (ISO8601)
 public class SAQueryRequest: SARemoteRequest {
     public let params:[String:AnyObject]
 
     public init(params:[String:AnyObject]? = [String:AnyObject]()) {
-        self.params = params!
+        var p = [String:AnyObject]()
+
+        for (key, value) in params! {
+            if let dt = value as? NSDate {
+                p[ key ] = SARemoteRequest.jnparser.stringFromDate( dt )
+            } else {
+                p[ key ] = value
+            }
+        }
+
+        self.params = p
         super.init()
     }
 }
