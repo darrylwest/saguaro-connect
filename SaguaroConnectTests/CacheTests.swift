@@ -106,7 +106,6 @@ class CacheTests: XCTestCase {
         XCTAssertEqual(item["id"] as? String, id, "id match")
     }
 
-
     func testClearAll() {
         let cache = Cache(name: "Test" )
         let count = 100
@@ -123,6 +122,35 @@ class CacheTests: XCTestCase {
         cache.clearAll()
         XCTAssertEqual(cache.count, 0, "should be zero")
 
+    }
+
+    func testRemoteById() {
+        let cache = Cache(name: "Test" )
+        let count = 10
+
+        let list = dataset.createModelList( count )
+        var removeId:String? = nil
+
+        for item in list {
+            let id = item["id"] as! String
+
+            cache.saveKeyValue(item, id: id)
+
+            if removeId == nil {
+                removeId = id
+            }
+        }
+
+        let rid = removeId!
+
+        XCTAssertEqual(cache.count, count, "count match")
+        guard let removed = cache.removeById( rid ) else {
+            return XCTFail("remove failed for id \( rid )")
+        }
+
+        print( removed )
+
+        XCTAssertEqual(cache.count, count - 1, "count match")
     }
 
     func testCreateJSON() {

@@ -75,6 +75,18 @@ public class Cache {
         return item
     }
 
+    /// find and remove the item by id
+    final public func removeById(id:String) -> [String:AnyObject]? {
+        guard let item = findKeyValueById( id ) else {
+            return nil
+        }
+
+        // remove it
+        cache[ id ] = nil
+
+        return item
+    }
+
     /// searches by lowercased prefix and returns list of item, i.e., models sorted by the field
     public func queryByField(field:String, value:String) -> [[String:AnyObject]] {
         let search = value.lowercaseString
