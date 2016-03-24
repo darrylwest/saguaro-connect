@@ -39,7 +39,7 @@ class CacheTests: XCTestCase {
 
         XCTAssertEqual(customers.count, 820, "customer count")
 
-        for var i = 0; i < customers.count; i++ {
+        for i in 0 ..< customers.count {
             let obj = customers[ i ]
             let id = obj[ "id" ] as! String
 
@@ -289,7 +289,7 @@ class CacheTests: XCTestCase {
         let count = 10
         var dates = [String]()
 
-        for (var i = 0; i < count; i++) {
+        for i in 0 ..< count {
             let rt = NSTimeInterval( Double( arc4random_uniform( 100000000 )) + 1000000.0 )
             let dt = NSDate( timeIntervalSinceReferenceDate: rt )
             let id = "id-\( i )"

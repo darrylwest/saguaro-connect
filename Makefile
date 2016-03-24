@@ -1,7 +1,6 @@
 
 PROJECT = SaguaroConnect
-# PLATFORM = 'platform=iOS Simulator,name=iPhone 6,OS=9.0'
-PLATFORM = 'platform=iOS Simulator,name=iPad 2,OS=9.0'
+PLATFORM = 'platform=iOS Simulator,name=iPad 2,OS=9.3'
 
 all:
 	@make test

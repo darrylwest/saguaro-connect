@@ -14,7 +14,7 @@ class TestDataset {
     let jnparser = JNParser()
 
     var fixturePath:String {
-        var parts = __FILE__.componentsSeparatedByString("/")
+        var parts = #file.componentsSeparatedByString("/")
 
         parts.removeLast()
 
@@ -65,8 +65,9 @@ class TestDataset {
         var list = [[String:AnyObject]]()
         var cc = count!
 
-        while (cc-- > 0) {
+        while (cc > 0) {
             list.append( createModel() )
+            cc -= 1
         }
 
         return list
