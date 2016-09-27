@@ -9,9 +9,9 @@
 import Foundation
 
 public enum HTTPFile {
-    case URL(NSURL,String?) // URL to a file, mimetype
-    case Data(String,NSData,String?) // filename, data, mimetype
-    case Text(String,String,String?) // filename, text, mimetype
+    case url(Foundation.URL,String?) // URL to a file, mimetype
+    case data(String,Foundation.Data,String?) // filename, data, mimetype
+    case text(String,String,String?) // filename, text, mimetype
 }
 
 // Supported request types; public to enable mock
@@ -32,28 +32,28 @@ typealias TaskCompletionHandler = (HTTPResult) -> Void
 struct TaskConfiguration {
     let credential:Credentials?
     let redirects:Bool
-    let originalRequest: NSURLRequest?
+    let originalRequest: URLRequest?
     var data: NSMutableData
     let progressHandler: TaskProgressHandler?
     let completionHandler: TaskCompletionHandler?
 }
 
 public struct JustSessionDefaults {
-    public var JSONReadingOptions = NSJSONReadingOptions(rawValue: 0)
-    public var JSONWritingOptions = NSJSONWritingOptions(rawValue: 0)
+    public var JSONReadingOptions = JSONSerialization.ReadingOptions(rawValue: 0)
+    public var JSONWritingOptions = JSONSerialization.WritingOptions(rawValue: 0)
     public var headers:[String:String] = [:]
     public var multipartBoundary = "Ju5tH77P15Aw350m3"
-    public var encoding = NSUTF8StringEncoding
+    public var encoding = String.Encoding.utf8
 }
 
 
 public struct HTTPProgress {
-    public enum Type {
-        case Upload
-        case Download
+    public enum HttpProgressType {
+        case upload
+        case download
     }
     
-    public let type:Type
+    public let type:HttpProgressType
     public let bytesProcessed:Int64
     public let bytesExpectedToProcess:Int64
     public var percent: Float {
@@ -63,7 +63,7 @@ public struct HTTPProgress {
 
 let errorDomain = "net.justhttp.Just"
 
-public class Just: NSObject, NSURLSessionDelegate {
+open class Just: NSObject, URLSessionDelegate {
     
     class var shared: Just {
         struct Singleton {
@@ -72,12 +72,12 @@ public class Just: NSObject, NSURLSessionDelegate {
         return Singleton.instance
     }
     
-    public init(session:NSURLSession? = nil, defaults:JustSessionDefaults? = nil) {
+    public init(session:Foundation.URLSession? = nil, defaults:JustSessionDefaults? = nil) {
         super.init()
         if let initialSession = session {
             self.session = initialSession
         } else {
-            self.session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate:self, delegateQueue:nil)
+            self.session = Foundation.URLSession(configuration: URLSessionConfiguration.default, delegate:self, delegateQueue:nil)
         }
         if let initialDefaults = defaults {
             self.defaults = initialDefaults
@@ -88,7 +88,7 @@ public class Just: NSObject, NSURLSessionDelegate {
     
     var taskConfigs:[TaskID:TaskConfiguration]=[:]
     var defaults:JustSessionDefaults!
-    var session: NSURLSession!
+    var session: Foundation.URLSession!
     var invalidURLError = NSError(
         domain: errorDomain,
         code: 0,
@@ -101,7 +101,7 @@ public class Just: NSObject, NSURLSessionDelegate {
         userInfo: [NSLocalizedDescriptionKey:"[Just] You are accessing asynchronous result synchronously."]
     )
     
-    func queryComponents(key: String, _ value: AnyObject) -> [(String, String)] {
+    func queryComponents(_ key: String, _ value: AnyObject) -> [(String, String)] {
         var components: [(String, String)] = []
         if let dictionary = value as? [String: AnyObject] {
             for (nestedKey, value) in dictionary {
@@ -112,23 +112,24 @@ public class Just: NSObject, NSURLSessionDelegate {
                 components += queryComponents("\(key)", value)
             }
         } else {
-            components.appendContentsOf([(percentEncodeString(key), percentEncodeString("\(value)"))])
+			let tuple = (percentEncodeString(key), percentEncodeString("\(value)"))
+            components.append(tuple)
         }
         
         return components
     }
     
-    func query(parameters: [String: AnyObject]) -> String {
+    func query(_ parameters: [String: AnyObject]) -> String {
         var components = [String]()
-        for key in Array(parameters.keys).sort(<) {
+        for key in Array(parameters.keys).sorted(by: <) {
             let value: AnyObject! = parameters[key]
             components.append("\(key)=\(value)")
         }
 
-        return components.joinWithSeparator("&")
+        return components.joined(separator: "&")
     }
     
-    func percentEncodeString(originalObject: AnyObject) -> String {
+    func percentEncodeString(_ originalObject: Any) -> String {
         if originalObject is NSNull {
             return "null"
         } else {
@@ -136,9 +137,9 @@ public class Just: NSObject, NSURLSessionDelegate {
                 return "null"
             }
             
-            let legalURLCharactersToBeEscaped = NSCharacterSet(charactersInString: ":&=;+!@#$()',*").invertedSet
+            let legalURLCharactersToBeEscaped = CharacterSet(charactersIn: ":&=;+!@#$()',*").inverted
             
-            guard let escaped = originalString.stringByAddingPercentEncodingWithAllowedCharacters( legalURLCharactersToBeEscaped ) else {
+            guard let escaped = originalString.addingPercentEncoding( withAllowedCharacters: legalURLCharactersToBeEscaped ) else {
                 return "null"
             }
             
@@ -147,68 +148,64 @@ public class Just: NSObject, NSURLSessionDelegate {
     }
     
     
-    func makeTask(request:NSURLRequest, configuration: TaskConfiguration) -> NSURLSessionDataTask? {
-        if let task:NSURLSessionDataTask = session.dataTaskWithRequest(request) {
-            taskConfigs[task.taskIdentifier] = configuration
-            return task
-        }
-        return nil
+    func makeTask(_ request:URLRequest, configuration: TaskConfiguration) -> URLSessionDataTask? {
+        let task:URLSessionDataTask = session.dataTask(with: request)
+		taskConfigs[task.taskIdentifier] = configuration
+        return task
     }
     
-    func synthesizeMultipartBody(data:[String:AnyObject], files:[String:HTTPFile]) -> NSData? {
+    func synthesizeMultipartBody(_ data:[String:AnyObject], files:[String:HTTPFile]) -> Data? {
         let body = NSMutableData()
-        let boundary = "--\(self.defaults.multipartBoundary)\r\n".dataUsingEncoding(defaults.encoding)!
+        let boundary = "--\(self.defaults.multipartBoundary)\r\n".data(using: defaults.encoding)!
         for (k,v) in data {
-            let valueToSend:AnyObject = v is NSNull ? "null" : v
-            body.appendData(boundary)
-            body.appendData("Content-Disposition: form-data; name=\"\(k)\"\r\n\r\n".dataUsingEncoding(defaults.encoding)!)
-            body.appendData("\(valueToSend)\r\n".dataUsingEncoding(defaults.encoding)!)
+            let valueToSend:AnyObject = v is NSNull ? "null" as AnyObject : v
+            body.append(boundary)
+            body.append("Content-Disposition: form-data; name=\"\(k)\"\r\n\r\n".data(using: defaults.encoding)!)
+            body.append("\(valueToSend)\r\n".data(using: defaults.encoding)!)
         }
         
         for (k,v) in files {
-            body.appendData(boundary)
-            var partContent: NSData? = nil
+            body.append(boundary)
+            var partContent: Data? = nil
             var partFilename:String? = nil
             var partMimetype:String? = nil
             switch v {
-            case let .URL(URL, mimetype):
-                if let component = URL.lastPathComponent {
-                    partFilename = component
-                }
-                if let URLContent = NSData(contentsOfURL: URL) {
+            case let .url(url, mimetype):
+				partFilename = url.lastPathComponent
+                if let URLContent = try? Data(contentsOf: url) {
                     partContent = URLContent
                 }
                 partMimetype = mimetype
-            case let .Text(filename, text, mimetype):
+            case let .text(filename, text, mimetype):
                 partFilename = filename
-                if let textData = text.dataUsingEncoding(defaults.encoding) {
+                if let textData = text.data(using: defaults.encoding) {
                     partContent = textData
                 }
                 partMimetype = mimetype
-            case let .Data(filename, data, mimetype):
+            case let .data(filename, data, mimetype):
                 partFilename = filename
                 partContent = data
                 partMimetype = mimetype
             }
             if let content = partContent, let filename = partFilename {
-                body.appendData(NSData(data: "Content-Disposition: form-data; name=\"\(k)\"; filename=\"\(filename)\"\r\n".dataUsingEncoding(defaults.encoding)!))
+                body.append(NSData(data: "Content-Disposition: form-data; name=\"\(k)\"; filename=\"\(filename)\"\r\n".data(using: defaults.encoding)!) as Data)
                 if let type = partMimetype {
-                    body.appendData("Content-Type: \(type)\r\n\r\n".dataUsingEncoding(defaults.encoding)!)
+                    body.append("Content-Type: \(type)\r\n\r\n".data(using: defaults.encoding)!)
                 } else {
-                    body.appendData("\r\n".dataUsingEncoding(defaults.encoding)!)
+                    body.append("\r\n".data(using: defaults.encoding)!)
                 }
-                body.appendData(content)
-                body.appendData("\r\n".dataUsingEncoding(defaults.encoding)!)
+                body.append(content)
+                body.append("\r\n".data(using: defaults.encoding)!)
             }
         }
         if body.length > 0 {
-            body.appendData("--\(self.defaults.multipartBoundary)--\r\n".dataUsingEncoding(defaults.encoding)!)
+            body.append("--\(self.defaults.multipartBoundary)--\r\n".data(using: defaults.encoding)!)
         }
-        return body
+        return body as Data
     }
     
     func synthesizeRequest(
-        method:HTTPMethod,
+        _ method:HTTPMethod,
         URLString:String,
         params:[String:AnyObject],
         data:[String:AnyObject],
@@ -216,10 +213,10 @@ public class Just: NSObject, NSURLSessionDelegate {
         headers:CaseInsensitiveDictionary<String,String>,
         files:[String:HTTPFile],
         timeout:Double?,
-        requestBody:NSData?,
+        requestBody:Data?,
         URLQuery:String?
-        ) -> NSURLRequest? {
-            if let urlComponent = NSURLComponents(string: URLString) {
+        ) -> URLRequest? {
+            if var urlComponent = URLComponents(string: URLString) {
                 let queryString = query(params)
                 
                 if queryString.characters.count > 0 {
@@ -228,7 +225,7 @@ public class Just: NSObject, NSURLSessionDelegate {
                 
                 var finalHeaders = headers
                 var contentType:String? = nil
-                var body:NSData?
+                var body:Data?
                 
                 if let requestData = requestBody {
                     body = requestData
@@ -239,21 +236,21 @@ public class Just: NSObject, NSURLSessionDelegate {
                     if let requestJSON = json {
                         contentType = "application/json"
                         do {
-                            body = try NSJSONSerialization.dataWithJSONObject(requestJSON, options: defaults.JSONWritingOptions)
+                            body = try JSONSerialization.data(withJSONObject: requestJSON, options: defaults.JSONWritingOptions)
                         } catch _ {
                             body = nil
                         }
                     } else {
                         if data.count > 0 {
-                            if headers["content-type"]?.lowercaseString == "application/json" { // assume user wants JSON if she is using this header
+                            if headers["content-type"]?.lowercased() == "application/json" { // assume user wants JSON if she is using this header
                                 do {
-                                    body = try NSJSONSerialization.dataWithJSONObject(data, options: defaults.JSONWritingOptions)
+                                    body = try JSONSerialization.data(withJSONObject: data, options: defaults.JSONWritingOptions)
                                 } catch _ {
                                     body = nil
                                 }
                             } else {
                                 contentType = "application/x-www-form-urlencoded"
-                                body = query(data).dataUsingEncoding(defaults.encoding)
+                                body = query(data).data(using: defaults.encoding)
                             }
                         }
                     }
@@ -263,11 +260,11 @@ public class Just: NSObject, NSURLSessionDelegate {
                     finalHeaders["Content-Type"] = contentTypeValue
                 }
                 
-                if let URL = urlComponent.URL {
-                    let request = NSMutableURLRequest(URL: URL)
-                    request.cachePolicy = .ReloadIgnoringLocalCacheData
-                    request.HTTPBody = body
-                    request.HTTPMethod = method.rawValue
+                if let URL = urlComponent.url {
+                    let request = NSMutableURLRequest(url: URL)
+                    request.cachePolicy = .reloadIgnoringLocalCacheData
+                    request.httpBody = body
+                    request.httpMethod = method.rawValue
                     if let requestTimeout = timeout {
                         request.timeoutInterval = requestTimeout
                     }
@@ -279,7 +276,7 @@ public class Just: NSObject, NSURLSessionDelegate {
                     for (k,v) in finalHeaders {
                         request.addValue(v, forHTTPHeaderField: k)
                     }
-                    return request
+                    return request as URLRequest
                 }
                 
             }
@@ -287,7 +284,7 @@ public class Just: NSObject, NSURLSessionDelegate {
     }
     
     func request(
-        method:HTTPMethod,
+        _ method:HTTPMethod,
         URLString:String,
         params:[String:AnyObject],
         data:[String:AnyObject],
@@ -299,12 +296,12 @@ public class Just: NSObject, NSURLSessionDelegate {
         redirects:Bool,
         timeout:Double?,
         URLQuery:String?,
-        requestBody:NSData?,
+        requestBody:Data?,
         asyncProgressHandler:TaskProgressHandler?,
-        asyncCompletionHandler:((HTTPResult!) -> Void)?) -> HTTPResult {
+        asyncCompletionHandler:((HTTPResult?) -> Void)?) -> HTTPResult {
             
             let isSync = asyncCompletionHandler == nil
-            let semaphore = dispatch_semaphore_create(0)
+            let semaphore = DispatchSemaphore(value: 0)
             var requestResult:HTTPResult = HTTPResult(data: nil, response: nil, error: syncResultAccessError, request: nil)
             
             let caseInsensitiveHeaders = CaseInsensitiveDictionary<String,String>(dictionary:headers)
@@ -320,7 +317,7 @@ public class Just: NSObject, NSURLSessionDelegate {
                 requestBody:requestBody,
                 URLQuery: URLQuery
                 ) {
-                    addCookies(request.URL!, newCookies: cookies)
+                    addCookies(request.url!, newCookies: cookies)
                     let config = TaskConfiguration(
                         credential:auth,
                         redirects:redirects,
@@ -333,7 +330,7 @@ public class Just: NSObject, NSURLSessionDelegate {
                             }
                             if isSync {
                                 requestResult = result
-                                dispatch_semaphore_signal(semaphore)
+                                semaphore.signal()
                             }
                             
                     }
@@ -341,7 +338,7 @@ public class Just: NSObject, NSURLSessionDelegate {
                         task.resume()
                     }
                     if isSync {
-                        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+                        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
                         return requestResult
                     }
             } else {
@@ -356,44 +353,44 @@ public class Just: NSObject, NSURLSessionDelegate {
             
     }
     
-    func addCookies(URL:NSURL, newCookies:[String:String]) {
+    func addCookies(_ URL:Foundation.URL, newCookies:[String:String]) {
         for (k,v) in newCookies {
-            if let cookie = NSHTTPCookie(properties: [
-                NSHTTPCookieName: k,
-                NSHTTPCookieValue: v,
-                NSHTTPCookieOriginURL: URL,
-                NSHTTPCookiePath: "/"
+            if let cookie = HTTPCookie(properties: [
+                HTTPCookiePropertyKey.name: k,
+                HTTPCookiePropertyKey.value: v,
+                HTTPCookiePropertyKey.originURL: URL,
+                HTTPCookiePropertyKey.path: "/"
                 ]) {
-                    session.configuration.HTTPCookieStorage?.setCookie(cookie)
+                    session.configuration.httpCookieStorage?.setCookie(cookie)
             }
         }
     }
 }
 
 
-extension Just: NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
-    public func URLSession(
-        session: NSURLSession,
-        task: NSURLSessionTask,
-        didReceiveChallenge challenge: NSURLAuthenticationChallenge,
-        completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void
+extension Just: URLSessionTaskDelegate, URLSessionDataDelegate {
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didReceive challenge: URLAuthenticationChallenge,
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
         ) {
-            var endCredential:NSURLCredential? = nil
+            var endCredential:URLCredential? = nil
             
             if let credential = taskConfigs[task.taskIdentifier]?.credential {
                 if !(challenge.previousFailureCount > 0) {
-                    endCredential = NSURLCredential(user: credential.0, password: credential.1, persistence: .ForSession)
+                    endCredential = URLCredential(user: credential.0, password: credential.1, persistence: .forSession)
                 }
             }
             
-            completionHandler(.UseCredential, endCredential)
+            completionHandler(.useCredential, endCredential)
     }
     
-    public func URLSession(
-        session: NSURLSession,
-        task: NSURLSessionTask,
-        willPerformHTTPRedirection response: NSHTTPURLResponse,
-        newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void
         ) {
             if let allowRedirects = taskConfigs[task.taskIdentifier]?.redirects {
                 if !allowRedirects {
@@ -406,9 +403,9 @@ extension Just: NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
             }
     }
     
-    public func URLSession(
-        session: NSURLSession,
-        task: NSURLSessionTask,
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
         didSendBodyData bytesSent: Int64,
         totalBytesSent: Int64,
         totalBytesExpectedToSend: Int64
@@ -416,7 +413,7 @@ extension Just: NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
             if let handler = taskConfigs[task.taskIdentifier]?.progressHandler {
                 handler(
                     HTTPProgress(
-                        type: .Upload,
+                        type: .upload,
                         bytesProcessed: totalBytesSent,
                         bytesExpectedToProcess: totalBytesExpectedToSend
                     )
@@ -424,34 +421,34 @@ extension Just: NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
             }
     }
     
-    public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         if let handler = taskConfigs[dataTask.taskIdentifier]?.progressHandler {
             handler(
                 HTTPProgress(
-                    type: .Download,
+                    type: .download,
                     bytesProcessed: dataTask.countOfBytesReceived,
                     bytesExpectedToProcess: dataTask.countOfBytesExpectedToReceive
                 )
             )
         }
         if taskConfigs[dataTask.taskIdentifier]?.data != nil {
-            taskConfigs[dataTask.taskIdentifier]?.data.appendData(data)
+            taskConfigs[dataTask.taskIdentifier]?.data.append(data)
         }
     }
     
-    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let config = taskConfigs[task.taskIdentifier], let handler = config.completionHandler {
             let result = HTTPResult(
-                data: config.data,
+                data: config.data as Data,
                 response: task.response,
-                error: error,
+                error: error as NSError?,
                 request: config.originalRequest ?? task.originalRequest
             )
             result.JSONReadingOptions = self.defaults.JSONReadingOptions
             result.encoding = self.defaults.encoding
             handler(result)
         }
-        taskConfigs.removeValueForKey(task.taskIdentifier)
+        taskConfigs.removeValue(forKey: task.taskIdentifier)
     }
 }
 

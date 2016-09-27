@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "NO"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EBDEB95B2B6ADBEC2E5C53D16721D4C7"
+               BlueprintIdentifier = "DEBBA8C7B1C7B097E439F4B262FFAC19"
                BuildableName = "SaguaroJSON.framework"
                BlueprintName = "SaguaroJSON"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

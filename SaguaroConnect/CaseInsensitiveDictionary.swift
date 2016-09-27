@@ -9,11 +9,10 @@
 import Foundation
 
 /// used for http header map
-public struct CaseInsensitiveDictionary<Key: Hashable, Value>: CollectionType, DictionaryLiteralConvertible {
-    private var _data:[Key: Value] = [:]
-    private var _keyMap: [String: Key] = [:]
+public struct CaseInsensitiveDictionary<Key: Hashable, Value>: Collection, ExpressibleByDictionaryLiteral {
+    fileprivate var _data:[Key: Value] = [:]
+    fileprivate var _keyMap: [String: Key] = [:]
     
-    public typealias Element = (Key, Value)
     public typealias Index = DictionaryIndex<Key, Value>
     public var startIndex: Index
     public var endIndex: Index
@@ -34,7 +33,7 @@ public struct CaseInsensitiveDictionary<Key: Hashable, Value>: CollectionType, D
     
     public init(dictionaryLiteral elements: (Key, Value)...) {
         for (key, value) in elements {
-            _keyMap["\(key)".lowercaseString] = key
+            _keyMap["\(key)".lowercased()] = key
             _data[key] = value
         }
         startIndex = _data.startIndex
@@ -43,26 +42,26 @@ public struct CaseInsensitiveDictionary<Key: Hashable, Value>: CollectionType, D
     
     public init(dictionary:[Key:Value]) {
         for (key, value) in dictionary {
-            _keyMap["\(key)".lowercaseString] = key
+            _keyMap["\(key)".lowercased()] = key
             _data[key] = value
         }
         startIndex = _data.startIndex
         endIndex = _data.endIndex
     }
     
-    public subscript (position: Index) -> Element {
+    public subscript (position: Index) -> DictionaryIterator<Key, Value>.Element {
         return _data[position]
     }
-    
+
     public subscript (key: Key) -> Value? {
         get {
-            if let realKey = _keyMap["\(key)".lowercaseString] {
+            if let realKey = _keyMap["\(key)".lowercased()] {
                 return _data[realKey]
             }
             return nil
         }
         set(newValue) {
-            let lowerKey = "\(key)".lowercaseString
+            let lowerKey = "\(key)".lowercased()
             if _keyMap[lowerKey] == nil {
                 _keyMap[lowerKey] = key
             }
@@ -70,8 +69,8 @@ public struct CaseInsensitiveDictionary<Key: Hashable, Value>: CollectionType, D
         }
     }
     
-    public func generate() -> DictionaryGenerator<Key, Value> {
-        return _data.generate()
+    public func makeIterator() -> DictionaryIterator<Key, Value> {
+        return _data.makeIterator()
     }
     
     public var keys: LazyMapCollection<[Key:Value], Key> {
@@ -81,4 +80,9 @@ public struct CaseInsensitiveDictionary<Key: Hashable, Value>: CollectionType, D
     public var values: LazyMapCollection<[Key : Value], Value> {
         return _data.values
     }
+
+	public func index(after: Index) -> Index {
+		return self._data.index(after: after)
+	}
+
 }

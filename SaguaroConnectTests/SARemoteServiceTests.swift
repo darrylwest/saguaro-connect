@@ -43,13 +43,13 @@ class SARemoteServiceTests: XCTestCase {
         let info = [
             "username":"flerb",
             "session":"9999999",
-            "loginTime":NSDate(),
+            "loginTime":Date(),
             "count":25
-        ]
+        ] as [String : Any]
 
         let service = SARemoteService(serviceName: "TestService")
 
-        let error = service.createError(errorType, request: request, userInfo: info)
+        let error = service.createError(errorType, request: request, userInfo: info as [String : AnyObject]?)
 
         XCTAssertNotNil(error, "should not be nil")
         XCTAssertEqual(error.domain, service.serviceName, "error domain test")
@@ -64,7 +64,7 @@ class SARemoteServiceTests: XCTestCase {
     }
 
     func testCreateSimpleRemoteRequest() {
-        let requestTime = NSDate().timeIntervalSince1970
+        let requestTime = Date().timeIntervalSince1970
         let request = SARemoteRequest()
 
         XCTAssertNotNil(request, "should exist")
@@ -82,11 +82,11 @@ class SARemoteServiceTests: XCTestCase {
             return XCTFail("could not parse iso date string: \( dts1 )")
         }
 
-        let params = [
-            "username":"flerb",
-            "session":"9999999",
-            "loginTime":dt,
-            "count":25
+		let params: [String : AnyObject] = [
+            "username":"flerb" as AnyObject,
+            "session":"9999999" as AnyObject,
+            "loginTime":dt as AnyObject,
+            "count":25 as AnyObject
         ]
 
         let request = SAQueryRequest(params: params)

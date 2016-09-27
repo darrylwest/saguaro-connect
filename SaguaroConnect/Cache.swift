@@ -15,24 +15,24 @@ import SaguaroJSON
 ///     - NSDictionary was not used because it doesn't implement try/catch on write
 ///     - JSON was used to serialize and make it easy to upload/download pre-loaded caches
 ///     - two directory options are offered-one in caches and another more stable location in Library
-public class Cache {
-    public static let JSON_PARSE_ERROR_CODE = 120
+open class Cache {
+    open static let JSON_PARSE_ERROR_CODE = 120
     
-    let jnparser:JNParser
-    let fileManager:NSFileManager
+    let jnparser: JNParser
+    let fileManager: FileManager
 
     var cache = [String:AnyObject]()
-    public let cacheFile:String
+    open let cacheFile: String
     
     // TODO : create a mutator for this...
-    public var lastRefresh:NSDate = NSDate.distantPast()
+    open var lastRefresh:Date = Date.distantPast
 
     /// this is the index to all cache items
     final public var count:Int {
         return cache.count
     }
 
-    public let name:String
+    open let name:String
     
     /// return all the cached items as an array of maps
     final public func getItems() -> [String:AnyObject] {
@@ -45,7 +45,7 @@ public class Cache {
         self.name = name
 
         // use the shared instance
-        fileManager = NSFileManager.defaultManager()
+        fileManager = FileManager.default
 
         if let file = cacheFile {
             self.cacheFile = file
@@ -61,13 +61,13 @@ public class Cache {
     }
 
     /// save the key to the cache
-    final public func saveKeyValue(value:[String:AnyObject], id key:String) {
+    final public func saveKeyValue(_ value:[String:AnyObject], id key:String) {
         // if key/value exists, see if this is an update; trigger save required
-        cache[ key ] = value
+        cache[ key ] = value as AnyObject?
     }
 
     /// find and return the value from key if it exists in the cache
-    final public func findKeyValueById(id:String) -> [String:AnyObject]? {
+    final public func findKeyValueById(_ id:String) -> [String:AnyObject]? {
         guard let item = cache[ id ] as? [String:AnyObject] else {
             return nil
         }
@@ -76,7 +76,7 @@ public class Cache {
     }
 
     /// find and remove the item by id
-    final public func removeById(id:String) -> [String:AnyObject]? {
+    final public func removeById(_ id:String) -> [String:AnyObject]? {
         guard let item = findKeyValueById( id ) else {
             return nil
         }
@@ -88,20 +88,20 @@ public class Cache {
     }
 
     /// searches by lowercased prefix and returns list of item, i.e., models sorted by the field
-    public func queryByField(field:String, value:String) -> [[String:AnyObject]] {
-        let search = value.lowercaseString
+    open func queryByField(_ field:String, value:String) -> [[String:AnyObject]] {
+        let search = value.lowercased()
         var list = [[String:AnyObject]]()
 
         for (_, obj) in cache {
             if let val = obj[ field ] as? String {
-                if val.lowercaseString.hasPrefix( search ) {
+                if val.lowercased().hasPrefix( search ) {
                     list.append( obj as! [String:AnyObject] )
                 }
             }
         }
 
-        let sorted = list.sort { v1, v2 in
-            if let s1 = v1[ field ] as? String, s2 = v2[ field ] as? String {
+        let sorted = list.sorted { v1, v2 in
+            if let s1 = v1[ field ] as? String, let s2 = v2[ field ] as? String {
                 return s1 < s2
             } else {
                 return false
@@ -119,9 +119,9 @@ public class Cache {
     /// remove the cache file; return true if no errors
     final public func removeCacheFile() -> Bool {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         do {
-            try fileManager.removeItemAtPath( cacheFile )
+            try fileManager.removeItem( atPath: cacheFile )
         } catch let err {
             NSLog("error removing cache file: \( err )")
             return false
@@ -131,20 +131,20 @@ public class Cache {
     }
 
     /// read all keys from the cache index; copy all objects; wrap the object list and return as a json string
-    final public func createJSON(listName:String) -> String? {
+    final public func createJSON(_ listName:String) -> String? {
         var list = [AnyObject]()
 
         for (_,value) in cache {
             list.append( value )
         }
 
-        let wrapper = JSONResponseWrapper.createWrapper(key:listName, value:list)
+        let wrapper = JSONResponseWrapper.createWrapper(key:listName, value:list as AnyObject)
 
         return jnparser.stringify( wrapper )
     }
     
-    final public func parseJSONResponse(json:String) -> ([String:AnyObject]?, JSONResponseWrapper?, NSError?) {
-        func createError(reason:String) -> ([String:AnyObject]?, JSONResponseWrapper?, NSError?) {
+    final public func parseJSONResponse(_ json:String) -> ([String:AnyObject]?, JSONResponseWrapper?, NSError?) {
+        func createError(_ reason:String) -> ([String:AnyObject]?, JSONResponseWrapper?, NSError?) {
             let info = [ "parse": name, "reason": reason ]
             return (nil, nil, NSError( domain: self.name, code: Cache.JSON_PARSE_ERROR_CODE, userInfo: info))
         }
@@ -162,10 +162,10 @@ public class Cache {
 
     /// read and return the cache file contents if they exist; read on startup if off-line
     final public func readCacheFromDisk() -> String? {
-        if fileManager.fileExistsAtPath( cacheFile ) {
+        if fileManager.fileExists( atPath: cacheFile ) {
 
             do {
-                let str = try String(contentsOfFile: cacheFile, encoding: NSUTF8StringEncoding)
+                let str = try String(contentsOfFile: cacheFile, encoding: String.Encoding.utf8)
 
                 return str
             } catch let error as NSError {
@@ -177,14 +177,14 @@ public class Cache {
     }
 
     /// use this to write json files directly to the cache folder, e.g., on startup when on-line
-    final public func writeCacheToDisk(contents:String) -> Bool {
+    final public func writeCacheToDisk(_ contents:String) -> Bool {
         if cacheFile.characters.isEmpty {
             return false
         }
 
         do {
             try createCacheFolder()
-            try contents.writeToFile(cacheFile, atomically: true, encoding: NSUTF8StringEncoding)
+            try contents.write(toFile: cacheFile, atomically: true, encoding: String.Encoding.utf8)
 
             return true
         } catch let error as NSError {
@@ -195,13 +195,13 @@ public class Cache {
     }
 
     /// find the latest update based on parameter "lastUpdated" (complient with data model DOI)
-    final public func findLatestUpdateDate() -> NSDate {
-        var latestDate = NSDate(timeIntervalSinceReferenceDate: 0.0)
+    final public func findLatestUpdateDate() -> Date {
+        var latestDate = Date(timeIntervalSinceReferenceDate: 0.0)
 
         for (_,item) in getItems() {
             if let map = item as? [String:AnyObject] {
                 if let date = jnparser.parseDate( map[ "lastUpdated" ]) {
-                    if latestDate.compare( date ) == NSComparisonResult.OrderedAscending {
+                    if latestDate.compare( date ) == ComparisonResult.orderedAscending {
                         latestDate = date
                     }
                 }
@@ -212,13 +212,13 @@ public class Cache {
     }
 
     /// write the cached data models to local disk with standard wrapper
-    final public func syncToDisk(listName:String) -> Bool {
+    final public func syncToDisk(_ listName:String) -> Bool {
         guard let json = createJSON( listName ) else { return false }
         return writeCacheToDisk( json )
     }
 
     /// read the data models from local disk and save to cache; data models must include an id
-    final public func syncFromDisk(listName:String) -> (Int?, NSError?) {
+    final public func syncFromDisk(_ listName:String) -> (Int?, NSError?) {
         guard let str = readCacheFromDisk() else {
             return (0, nil)
         }
@@ -229,7 +229,7 @@ public class Cache {
             return (nil, error)
         }
 
-        guard let jsonObject = jobj, wrapper = wrap else {
+        guard let jsonObject = jobj, let wrapper = wrap else {
             return (nil, err)
         }
 
@@ -252,18 +252,18 @@ public class Cache {
     }
 
     // return a list of stats, filename, size, count, etc
-    public func listStats() -> [String:AnyObject] {
-        var stats:[String:AnyObject] = [
+    open func listStats() -> [String:Any] {
+        var stats: [String : Any] = [
             "name": self.name,
             "filename": self.cacheFile,
             "elementCount": self.cache.count
         ]
 
         do {
-            let fileAttrs = try fileManager.attributesOfItemAtPath( cacheFile )
+            let fileAttrs = try fileManager.attributesOfItem( atPath: cacheFile )
 
-            stats[ "fileSize" ] = fileAttrs[ "NSFileSize" ]
-            stats[ "fileDate" ] = fileAttrs[ "NSFileModificationDate" ]
+            stats["fileSize"] = fileAttrs[FileAttributeKey.size]
+            stats[ "fileDate"] = fileAttrs[FileAttributeKey.modificationDate]
         } catch let err {
             stats[ "fileError" ] = err as NSError?
         }
@@ -273,36 +273,36 @@ public class Cache {
 
     /// create the cache folder from the specified cache file path
     final public func createCacheFolder() throws {
-        let filename = fileManager.displayNameAtPath( cacheFile )
-        guard let range:Range<String.Index> = cacheFile.rangeOfString( filename ) else {
+        let filename = fileManager.displayName( atPath: cacheFile )
+        guard let range:Range<String.Index> = cacheFile.range( of: filename ) else {
             NSLog("could not find filename \( filename ) from path: \( cacheFile )")
             return
         }
 
         var cacheFolder = cacheFile
-        cacheFolder.removeRange( range )
+        cacheFolder.removeSubrange( range )
 
-        if fileManager.fileExistsAtPath( cacheFolder ) == false {
-            try fileManager.createDirectoryAtPath(cacheFolder, withIntermediateDirectories: true, attributes: nil)
+        if fileManager.fileExists( atPath: cacheFolder ) == false {
+            try fileManager.createDirectory(atPath: cacheFolder, withIntermediateDirectories: true, attributes: nil)
         }
     }
 
     /// creates a standard path for temporary cache files; this may not be the best place for the cache files. your
     /// subclass may require a more stable folder to insure that iOS neither removes files or discards data
-    static public func createCachePath(name:String) -> String? {
-        guard let path = NSSearchPathForDirectoriesInDomains( .CachesDirectory, .UserDomainMask, true ).first else {
+    static open func createCachePath(_ name:String) -> String? {
+        guard let path = NSSearchPathForDirectoriesInDomains( .cachesDirectory, .userDomainMask, true ).first else {
             return nil
         }
 
-        return "\( path )/com.vecore.caches/\( name.lowercaseString ).json"
+        return "\( path )/com.vecore.caches/\( name.lowercased() ).json"
     }
 
     /// a permanent cache location
-    static public func createPermanentCachePath(name:String) -> String? {
-        guard let path = NSSearchPathForDirectoriesInDomains( .LibraryDirectory , .UserDomainMask, true ).first else {
+    static open func createPermanentCachePath(_ name:String) -> String? {
+        guard let path = NSSearchPathForDirectoriesInDomains( .libraryDirectory , .userDomainMask, true ).first else {
             return nil
         }
         
-        return "\( path )/com.vecore.caches/\( name.lowercaseString ).json"
+        return "\( path )/com.vecore.caches/\( name.lowercased() ).json"
     }
 }
