@@ -32,9 +32,9 @@ public extension SARemoteServiceType {
     public func createError(_ errorType: SAServiceErrorType, request:SARemoteRequestModel, userInfo:[String:AnyObject]? = [:]) -> NSError {
         var info = userInfo!
 
-        info[ "requestId" ] = request.id as AnyObject?
-        info[ "requestTime" ] = request.requestTime as AnyObject?
-        info[ "message" ] = errorType.message as AnyObject?
+        info[ "requestId" ] = request.id as AnyObject
+        info[ "requestTime" ] = request.requestTime as AnyObject
+        info[ "message" ] = errorType.message as AnyObject
 
         return NSError(domain: serviceName, code: errorType.code, userInfo: info)
     }

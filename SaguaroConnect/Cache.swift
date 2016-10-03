@@ -63,7 +63,7 @@ open class Cache {
     /// save the key to the cache
     final public func saveKeyValue(_ value:[String:AnyObject], id key:String) {
         // if key/value exists, see if this is an update; trigger save required
-        cache[ key ] = value as AnyObject?
+        cache[ key ] = value as AnyObject
     }
 
     /// find and return the value from key if it exists in the cache
