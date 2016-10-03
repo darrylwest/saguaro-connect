@@ -9,4 +9,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "9.0"
   s.source      = { :git => "https://github.com/darrylwest/saguaro-connect.git", :tag => s.version }
   s.source_files = "SaguaroConnect/*.swift"
+  s.dependency 'Just', '~> 0.5.2'
 end

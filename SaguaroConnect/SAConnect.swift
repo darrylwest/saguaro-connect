@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Just
 
 public struct HTTPRequest {
     let url:String
@@ -53,7 +54,7 @@ public protocol HTTPRemote {
 }
 
 public struct SARemote: HTTPRemote {
-    let http:Just = Just()
+    let http: HTTP = HTTP()
     
     public func get(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.GET, request: request)

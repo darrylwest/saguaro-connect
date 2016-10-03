@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DEBBA8C7B1C7B097E439F4B262FFAC19"
+               BlueprintIdentifier = "72FD338D90545F1B0106585B6D778253"
                BuildableName = "SaguaroJSON.framework"
                BlueprintName = "SaguaroJSON"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
