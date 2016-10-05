@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Just
 
 public struct HTTPRequest {
     let url:String
@@ -20,11 +21,11 @@ public struct HTTPRequest {
     let allowRedirects:Bool
     let timeout:Double?
     let query:String?
-    let requestBody:NSData?
-    let asyncProgressHandler:((HTTPProgress!) -> Void)?
-    let asyncCompletionHandler:((HTTPResult!) -> Void)?
+    let requestBody:Data?
+    let asyncProgressHandler:((HTTPProgress?) -> Void)?
+    let asyncCompletionHandler:((HTTPResult?) -> Void)?
     
-    public init(url:String, params:[String:AnyObject] = [:], data:[String:AnyObject] = [:], json:[String:AnyObject]? = nil, headers:[String:String] = [:], files:[String:HTTPFile] = [:], auth:(String,String)? = nil, cookies:[String:String] = [:], allowRedirects:Bool = true, timeout:Double? = nil, query:String? = nil, requestBody:NSData? = nil, asyncProgressHandler:((HTTPProgress!) -> Void)? = nil, asyncCompletionHandler:((HTTPResult!) -> Void)? = nil) {
+    public init(url:String, params:[String:AnyObject] = [:], data:[String:AnyObject] = [:], json:[String:AnyObject]? = nil, headers:[String:String] = [:], files:[String:HTTPFile] = [:], auth:(String,String)? = nil, cookies:[String:String] = [:], allowRedirects:Bool = true, timeout:Double? = nil, query:String? = nil, requestBody:Data? = nil, asyncProgressHandler:((HTTPProgress?) -> Void)? = nil, asyncCompletionHandler:((HTTPResult?) -> Void)? = nil) {
         self.url = url
         self.params = params
         self.data = data
@@ -43,47 +44,47 @@ public struct HTTPRequest {
 }
 
 public protocol HTTPRemote {
-    func get(request:HTTPRequest) -> HTTPResult
-    func post(request:HTTPRequest) -> HTTPResult
-    func put(request:HTTPRequest) -> HTTPResult
-    func head(request:HTTPRequest) -> HTTPResult
-    func delete(request:HTTPRequest) -> HTTPResult
-    func options(request:HTTPRequest) -> HTTPResult
-    func patch(request:HTTPRequest) -> HTTPResult
+    func get(_ request:HTTPRequest) -> HTTPResult
+    func post(_ request:HTTPRequest) -> HTTPResult
+    func put(_ request:HTTPRequest) -> HTTPResult
+    func head(_ request:HTTPRequest) -> HTTPResult
+    func delete(_ request:HTTPRequest) -> HTTPResult
+    func options(_ request:HTTPRequest) -> HTTPResult
+    func patch(_ request:HTTPRequest) -> HTTPResult
 }
 
 public struct SARemote: HTTPRemote {
-    let http:Just = Just()
+    let http: HTTP = HTTP()
     
-    public func get(request:HTTPRequest) -> HTTPResult {
+    public func get(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.GET, request: request)
     }
     
-    public func post(request:HTTPRequest) -> HTTPResult {
+    public func post(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.POST, request: request)
     }
     
-    public func put(request:HTTPRequest) -> HTTPResult {
+    public func put(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.PUT, request: request)
     }
     
-    public func head(request:HTTPRequest) -> HTTPResult {
+    public func head(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.HEAD, request: request)
     }
     
-    public func delete(request:HTTPRequest) -> HTTPResult {
+    public func delete(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.DELETE, request: request)
     }
     
-    public func options(request:HTTPRequest) -> HTTPResult {
+    public func options(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.OPTIONS, request: request)
     }
     
-    public func patch(request:HTTPRequest) -> HTTPResult {
+    public func patch(_ request:HTTPRequest) -> HTTPResult {
         return sendRequest( HTTPMethod.PATCH, request: request)
     }
     
-    func sendRequest(method:HTTPMethod, request:HTTPRequest) -> HTTPResult {
+    func sendRequest(_ method:HTTPMethod, request:HTTPRequest) -> HTTPResult {
         return http.request(method,
             URLString:request.url,
             params:request.params,

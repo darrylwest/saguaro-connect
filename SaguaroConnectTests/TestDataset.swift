@@ -14,18 +14,18 @@ class TestDataset {
     let jnparser = JNParser()
 
     var fixturePath:String {
-        var parts = #file.componentsSeparatedByString("/")
+        var parts = #file.components(separatedBy: "/")
 
         parts.removeLast()
 
-        return "/" + parts.joinWithSeparator("/")
+        return "/" + parts.joined(separator: "/")
     }
 
-    func readFixtureFile(filename:String) -> String? {
+    func readFixtureFile(_ filename:String) -> String? {
         let path = fixturePath + "/" + filename
 
         do {
-            let text = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+            let text = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
 
             return text
         } catch let error as NSError {
@@ -34,35 +34,35 @@ class TestDataset {
         }
     }
 
-    func createDocumentIdentifierMap() -> [String:AnyObject] {
-        let uuid = NSUUID().UUIDString.lowercaseString
-        let mid = uuid.stringByReplacingOccurrencesOfString("-", withString:"")
+    func createDocumentIdentifierMap() -> [String : AnyObject] {
+        let uuid = NSUUID().uuidString.lowercased()
+        let mid = uuid.replacingOccurrences(of: "-", with:"")
 
-        let map = [
+		let map = [
             "id":mid,
-            "dateCreated":NSDate(),
-            "lastUpdated":NSDate(),
+            "dateCreated":Date(),
+            "lastUpdated":Date(),
             "version":"1.0"
-        ]
+        ] as [String : Any]
 
-        return map
+		return map as [String : AnyObject]
     }
 
-    func createModel() -> [String:AnyObject] {
+    func createModel() -> [String : AnyObject] {
         var model = createDocumentIdentifierMap()
-        model[ "names" ] = ["jon","jane","joe"]
-        model[ "jobs" ] = [
-            "job1":"my job 1",
-            "job2":"my second job",
-            "job 3":"my third job",
-            "color":UIColor(red: 100.0/255, green:110.0/255, blue:120.0/255, alpha: 1.0)
-        ]
+        model["names"] = ["jon", "jane", "joe"] as AnyObject
+        model["jobs"] = [
+            "job1": "my job 1",
+            "job2": "my second job",
+            "job 3": "my third job",
+            "color": UIColor(red: 100.0/255, green:110.0/255, blue:120.0/255, alpha: 1.0)
+        ] as AnyObject
 
         return model
     }
 
-    func createModelList(count:Int? = 20) -> [[String:AnyObject]] {
-        var list = [[String:AnyObject]]()
+    func createModelList(_ count:Int? = 20) -> [[String : AnyObject]] {
+        var list = [[String : AnyObject]]()
         var cc = count!
 
         while (cc > 0) {
@@ -73,7 +73,7 @@ class TestDataset {
         return list
     }
 
-    func createComplexJSONMap() -> [String:AnyObject] {
+    func createComplexJSONMap() -> [String:Any] {
         let name = "farley"
         let age = 42
         let height = 4.3
@@ -81,19 +81,17 @@ class TestDataset {
 
         let model = createModel()
 
-        let obj:[String:AnyObject] = [
+        let obj:[String:Any] = [
             "name": name,
             "age": age,
             "height": height,
             "created": created,
             "hasHair": false,
-            "newcolor": UIColor.blueColor(),
+            "newcolor": UIColor.blue,
             "nullvalue":NSNull(),
             "model":model
         ]
 
         return obj
     }
-
-
 }

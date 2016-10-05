@@ -7,18 +7,19 @@
 //
 
 import XCTest
+import Just
 @testable import SaguaroConnect
 
 class HTTPRemoteTests: XCTestCase {
     
     // for async tests
-    let timeout = NSTimeInterval( 2.0 )
+    let timeout = TimeInterval(2.0)
     let expectationName = "httpRequestComplete"
     
     func testSyncronousGet() {
         let http = SARemote()
         
-        let request = HTTPRequest(url: "http://httpbin.org/get", params:["page": 3] )
+        let request = HTTPRequest(url: "http://httpbin.org/get", params:["page": 3 as AnyObject] )
         
         // the httpResponse
         let resp = http.get( request )
@@ -38,9 +39,11 @@ class HTTPRemoteTests: XCTestCase {
     }
     
     func testAsyncRequest() {
-        let expectation = expectationWithDescription( expectationName )
+        let expectation = self.expectation(description: expectationName)
         
-        let callback:((HTTPResult!) -> Void)? = { (response:HTTPResult!) -> Void in
+        let callback:((HTTPResult?) -> Void)? = { response in
+			guard let response = response else { return }
+			
             print("status: \( response.ok )")
             print("json: \( response.json )")
             
@@ -51,24 +54,24 @@ class HTTPRemoteTests: XCTestCase {
         }
         
         let http = SARemote()
-        let request = HTTPRequest(url: "http://httpbin.org/get", params:["page": 3], asyncCompletionHandler: callback )
-        http.get(request)
+        let request = HTTPRequest(url: "http://httpbin.org/get", params:["page": 3 as AnyObject], asyncCompletionHandler: callback )
+        _ = http.get(request)
         
-        waitForExpectationsWithTimeout(timeout, handler: { error in
+        waitForExpectations(timeout: timeout, handler: { error in
             XCTAssertNil(error, "asyn error: \( error )")
         })
     }
     
     func testHTTPRequest() {
-        let request = HTTPRequest(url:"http://httpbin.org/get", params:["page": 3])
+        let request = HTTPRequest(url:"http://httpbin.org/get", params:["page": 3 as AnyObject])
         
         XCTAssertEqual(request.url, "http://httpbin.org/get")
         XCTAssertNotNil(request.params, "should not be nil")
     }
     
     func testHTTPPost() {
-        let json = ["firstName":"barney", "lastName":"fife"]
-        let request = HTTPRequest(url: "http://httpbin.org/post", json:json, timeout:20)
+		let json: [String : AnyObject] = ["firstName": "barney" as AnyObject, "lastName": "fife" as AnyObject]
+        let request = HTTPRequest(url: "http://httpbin.org/post", json: json, timeout:20)
         
         let http = SARemote()
         let resp = http.post( request )
@@ -89,8 +92,8 @@ class HTTPRemoteTests: XCTestCase {
     }
     
     func testHTTPHead() {
-        let json = ["firstName":"barney", "lastName":"fife", "more":"less"]
-        let request = HTTPRequest(url: "http://httpbin.org/get", json:json, timeout:20)
+		let json: [String : AnyObject] = ["firstName": "barney" as AnyObject, "lastName": "fife" as AnyObject, "more": "less" as AnyObject]
+        let request = HTTPRequest(url: "http://httpbin.org/get", json: json, timeout:20)
         
         let http = SARemote()
         let resp = http.head( request )

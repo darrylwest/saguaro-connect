@@ -277,8 +277,8 @@ class CacheTests: XCTestCase {
             try cache.createCacheFolder()
 
             // now remove it
-            let fileManager = NSFileManager.defaultManager()
-            try fileManager.removeItemAtPath( cacheFolder )
+            let fileManager = FileManager.default
+            try fileManager.removeItem(atPath: cacheFolder)
         } catch {
             XCTFail("failed to create folder for \(cacheFolder)")
         }
@@ -290,13 +290,13 @@ class CacheTests: XCTestCase {
         var dates = [String]()
 
         for i in 0 ..< count {
-            let rt = NSTimeInterval( Double( arc4random_uniform( 100000000 )) + 1000000.0 )
-            let dt = NSDate( timeIntervalSinceReferenceDate: rt )
+            let rt = TimeInterval( Double( arc4random_uniform( 100000000 )) + 1000000.0 )
+            let dt = Date( timeIntervalSinceReferenceDate: rt )
             let id = "id-\( i )"
 
-            let obj = [
-                "id":id,
-                "lastUpdated":jnparser.stringFromDate( dt )
+			let obj: [String : AnyObject] = [
+                "id": id as AnyObject,
+                "lastUpdated": jnparser.stringFromDate(dt) as AnyObject
             ]
 
             dates.append( "\( dt )")
@@ -304,7 +304,7 @@ class CacheTests: XCTestCase {
             cache.saveKeyValue(obj, id: id)
         }
 
-        let last = dates.sort().last!
+        let last = dates.sorted().last!
         print( last )
 
         XCTAssertEqual( cache.count, count, "size" )
