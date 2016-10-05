@@ -2,14 +2,12 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'SaguaroConnect' do
-  pod 'SaguaroJSON', :git => 'https://github.com/darrylwest/saguaro-json.git', :branch => 'feature/swift3'
-  #pod 'SaguaroJSON', :path => '/Users/jeden/dev/projects/elapsus/blue-lasso/dev/saguaro/json'
+  pod 'SaguaroJSON', :git => 'https://github.com/darrylwest/saguaro-json.git'
   pod 'Just', '~> 0.5.2'
 end
 
 target 'SaguaroConnectTests' do
-  pod 'SaguaroJSON', :git => 'https://github.com/darrylwest/saguaro-json.git', :branch => 'feature/swift3'
-  #pod 'SaguaroJSON', :path => '/Users/jeden/dev/projects/elapsus/blue-lasso/dev/saguaro/json'
+  pod 'SaguaroJSON', :git => 'https://github.com/darrylwest/saguaro-json.git'
   pod 'Just', '~> 0.5.2'
 end
 

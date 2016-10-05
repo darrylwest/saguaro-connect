@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Just
 @testable import SaguaroConnect
 
 class HTTPRemoteTests: XCTestCase {
