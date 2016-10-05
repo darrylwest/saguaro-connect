@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A9D7C84B81243C6B0FC6B3F760DD447741D3EE9E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9765EE489D1360BE43F25DC32BC77A7B6B1EC2E1" : 9223372036854775807,
+    "A9D7C84B81243C6B0FC6B3F760DD447741D3EE9E" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E979EDEC-10C7-4D97-91A3-2F378ACFB913",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9765EE489D1360BE43F25DC32BC77A7B6B1EC2E1" : "json\/",
+    "A9D7C84B81243C6B0FC6B3F760DD447741D3EE9E" : "connect\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SaguaroConnect",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SaguaroConnect.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/darrylwest\/saguaro-json.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9765EE489D1360BE43F25DC32BC77A7B6B1EC2E1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/darrylwest\/saguaro-connect.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A9D7C84B81243C6B0FC6B3F760DD447741D3EE9E"
+    }
+  ]
+}

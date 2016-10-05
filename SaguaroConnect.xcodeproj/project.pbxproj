@@ -14,10 +14,6 @@
 		BA2AB3031B5D735F0092F99B /* InternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2AB3021B5D735F0092F99B /* InternetReachability.swift */; };
 		BA30282F1B3A27CA00715013 /* SaguaroConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = BA30282E1B3A27CA00715013 /* SaguaroConnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA3028361B3A27CA00715013 /* SaguaroConnect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA30282B1B3A27CA00715013 /* SaguaroConnect.framework */; };
-		BA3028481B3A4B5000715013 /* Just.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028471B3A4B5000715013 /* Just.swift */; };
-		BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */; };
-		BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */; };
-		BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */; };
 		BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30284F1B3A4C6A00715013 /* SAConnect.swift */; };
 		BA3028521B3A4CCE00715013 /* SAConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3028511B3A4CCE00715013 /* SAConnectTests.swift */; };
 		BA8640A61B5EB5F40059D95B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8640A51B5EB5F40059D95B /* Cache.swift */; };
@@ -53,10 +49,6 @@
 		BA3028301B3A27CA00715013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3028351B3A27CA00715013 /* SaguaroConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaguaroConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA30283C1B3A27CA00715013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA3028471B3A4B5000715013 /* Just.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
-		BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseInsensitiveDictionary.swift; sourceTree = "<group>"; };
-		BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		BA30284F1B3A4C6A00715013 /* SAConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnect.swift; sourceTree = "<group>"; };
 		BA3028511B3A4CCE00715013 /* SAConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAConnectTests.swift; sourceTree = "<group>"; };
 		BA8640A51B5EB5F40059D95B /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -122,7 +114,6 @@
 		BA30282D1B3A27CA00715013 /* SaguaroConnect */ = {
 			isa = PBXGroup;
 			children = (
-				BA3028451B3A4AF800715013 /* core */,
 				BA30282E1B3A27CA00715013 /* SaguaroConnect.h */,
 				BA3028301B3A27CA00715013 /* Info.plist */,
 				BA8640A51B5EB5F40059D95B /* Cache.swift */,
@@ -146,17 +137,6 @@
 				BAA5EA201B5E938C00D3EB94 /* TestDataset.swift */,
 			);
 			path = SaguaroConnectTests;
-			sourceTree = "<group>";
-		};
-		BA3028451B3A4AF800715013 /* core */ = {
-			isa = PBXGroup;
-			children = (
-				BA3028471B3A4B5000715013 /* Just.swift */,
-				BA3028491B3A4B9100715013 /* CaseInsensitiveDictionary.swift */,
-				BA30284B1B3A4BEC00715013 /* HTTPResponse.swift */,
-				BA30284D1B3A4C1700715013 /* HTTPStatusCodes.swift */,
-			);
-			name = core;
 			sourceTree = "<group>";
 		};
 		BA3028461B3A4B1700715013 /* core */ = {
@@ -238,14 +218,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "darryl.west@raincitysoftware.com";
 				TargetAttributes = {
 					BA30282A1B3A27CA00715013 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					BA3028341B3A27CA00715013 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -370,12 +352,8 @@
 			files = (
 				BA3028501B3A4C6A00715013 /* SAConnect.swift in Sources */,
 				BA8640A61B5EB5F40059D95B /* Cache.swift in Sources */,
-				BA30284C1B3A4BEC00715013 /* HTTPResponse.swift in Sources */,
-				BA3028481B3A4B5000715013 /* Just.swift in Sources */,
 				BA2AB2FD1B5D3DAF0092F99B /* SARemoteService.swift in Sources */,
 				BA2AB3031B5D735F0092F99B /* InternetReachability.swift in Sources */,
-				BA30284E1B3A4C1700715013 /* HTTPStatusCodes.swift in Sources */,
-				BA30284A1B3A4B9100715013 /* CaseInsensitiveDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,8 +394,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -464,8 +444,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -485,6 +467,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -496,7 +479,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54506080EFDE710ACA06E645 /* Pods-SaguaroConnect.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -509,6 +494,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -516,7 +502,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5A1B282D4990C533D3B7B679 /* Pods-SaguaroConnect.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -528,6 +516,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.raincitysoftware.com.SaguaroConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -535,10 +524,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BA855C236ABA09FB69BC76A /* Pods-SaguaroConnectTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SaguaroConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raincitysoftware.com.SaguaroConnectTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -546,10 +537,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC81325A9589CB475BB3A498 /* Pods-SaguaroConnectTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SaguaroConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.raincitysoftware.com.SaguaroConnectTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

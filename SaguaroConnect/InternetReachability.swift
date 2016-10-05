@@ -10,36 +10,36 @@ import Foundation
 import SystemConfiguration
 
 public protocol InternetReachableType {
-    var lastCheck:NSTimeInterval { get }
+    var lastCheck:TimeInterval { get }
     func isInternetReachable() -> Bool
 }
 
-public class InternetReachability: InternetReachableType {
+open class InternetReachability: InternetReachableType {
 
-    public final private(set) var lastCheck:NSTimeInterval = 0
-    private var connected = false
-    public final private(set) var minTimeBetweenSocketChecks:NSTimeInterval
+    public final fileprivate(set) var lastCheck:TimeInterval = 0
+    fileprivate var connected = false
+    public final fileprivate(set) var minTimeBetweenSocketChecks:TimeInterval
 
     public init() {
         self.minTimeBetweenSocketChecks = 15
     }
 
-    public init(minTimeBetweenSocketChecks:NSTimeInterval) {
+    public init(minTimeBetweenSocketChecks:TimeInterval) {
         self.minTimeBetweenSocketChecks = minTimeBetweenSocketChecks
     }
 
     final public func isInternetReachable() -> Bool {
 
-        if NSDate().timeIntervalSince1970 - lastCheck > minTimeBetweenSocketChecks {
+        if Date().timeIntervalSince1970 - lastCheck > minTimeBetweenSocketChecks {
             var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
-            zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+            zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
             zeroAddress.sin_family = sa_family_t(AF_INET)
 
-            let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
-                SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+            let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+                SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer(OpaquePointer($0)))
             }
 
-            var flags = SCNetworkReachabilityFlags.ConnectionAutomatic
+            var flags = SCNetworkReachabilityFlags.connectionAutomatic
             if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
                 return false
             }
@@ -53,7 +53,7 @@ public class InternetReachability: InternetReachableType {
                 connected = con
             }
 
-            lastCheck = NSDate().timeIntervalSince1970
+            lastCheck = Date().timeIntervalSince1970
         }
         
         return connected
